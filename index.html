@@ -136,23 +136,42 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
 /* ABOUT */
 .about{display:grid;grid-template-columns:400px 1fr;align-items:start;gap:60px;align-items:center}
 @media(max-width:860px){.about{grid-template-columns:1fr;gap:36px}}
-.star-demo{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;width:100%;max-width:400px;background:#04070b;cursor:pointer}
-.star-demo iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;opacity:0;transition:opacity 1.2s}
+.star-demo{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;width:100%;max-width:400px;background:#04070b}
+.star-demo.live{cursor:pointer}
+.sd-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.6s ease}
+.sd-slides img.on{opacity:1}
+.star-demo.live .sd-slides{display:none}
+.star-demo iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;opacity:0;transition:opacity 1.2s;display:none}
+.star-demo.live iframe{display:block}
 .star-demo.ready iframe{opacity:1}
 .star-demo.active{cursor:grab}
 .star-demo.active iframe{pointer-events:auto}
 .star-demo::after{content:'';position:absolute;inset:0;border-radius:var(--r);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);pointer-events:none}
 .sd-tag,.sd-hint{background:rgba(4,7,11,.62);backdrop-filter:blur(6px);padding:5px 10px;border-radius:99px}
 .sd-tag{position:absolute;left:12px;top:12px;z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--hot2);text-transform:uppercase;pointer-events:none;display:flex;align-items:center;gap:8px}
+.star-demo:not(.live) .sd-tag::before{animation:none;background:var(--hot2)}
 .sd-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 0 rgba(255,106,43,.6);animation:pulse 1.8s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,106,43,0)}100%{box-shadow:0 0 0 0 rgba(255,106,43,0)}}
 .sd-hint{position:absolute;left:12px;bottom:12px;z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;pointer-events:none;transition:opacity .4s}
 .star-demo.active .sd-hint{opacity:0}
 .sd-load{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
-.star-demo.ready .sd-load{display:none}
+.sd-load{display:none}
+.star-demo.live:not(.ready) .sd-load{display:grid}
 .sd-cap{max-width:400px;margin-top:14px;font-size:13.5px;color:var(--muted);line-height:1.55}
 .sd-cap a{color:var(--hot2);white-space:nowrap}
-.sd-cap a:hover{text-decoration:underline}
+.sd-cap{min-height:4.6em;transition:opacity .5s}
+.sd-cap.fade{opacity:0}
+.sd-gpu{max-width:400px;margin-top:8px;font-size:12.5px;color:var(--dim);line-height:1.55}
+.sd-gpu a,.sd-run{color:var(--hot2);white-space:nowrap}
+.sd-gpu a:hover,.sd-run:hover{text-decoration:underline}
+.sd-run{background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.sd-cme{position:absolute;right:12px;top:12px;z-index:3;display:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#140800;background:var(--hot);border:0;border-radius:99px;padding:6px 12px;cursor:pointer}
+.sd-cme:hover{background:var(--hot2)}
+.sd-cme:disabled{opacity:.55;cursor:default}
+.star-demo.live.ready .sd-cme{display:block}
+.sd-dots{display:flex;gap:6px}
+.sd-dots i{width:6px;height:6px;border-radius:50%;background:var(--line2)}
+.sd-dots i.on{background:var(--hot2)}
 .about-txt p{font-size:clamp(17px,1.8vw,20px);color:#c4c7d0;margin-bottom:20px}
 .about-txt p strong{color:var(--text);font-weight:600}
 
@@ -385,13 +404,23 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
 <section id="about" style="padding-top:40px">
   <div class="wrap about">
     <div class="rv">
-      <div class="star-demo" id="starDemo" data-src="/star-sim/" data-preset="1" role="img" aria-label="Живая симуляция короны звезды Барнарда">
+      <div class="star-demo" id="starDemo" data-src="/star-sim/" data-preset="1" aria-label="Симуляция звёзд">
+        <div class="sd-slides">
+          <img src="assets/stars/barnard.webp" alt="Звезда Барнарда — кадр симулятора" class="on">
+          <img src="assets/stars/proxima-arcs.webp" alt="Арки короны Проксимы Центавра — кадр симулятора" loading="lazy">
+          <img src="assets/stars/sun-cme.webp" alt="Корональный выброс на Солнце — кадр симулятора" loading="lazy">
+          <img src="assets/stars/proxima.webp" alt="Проксима Центавра — кадр симулятора" loading="lazy">
+          <img src="assets/stars/sun.webp" alt="Солнце — кадр симулятора" loading="lazy">
+          <img src="assets/stars/eps-indi.webp" alt="ε Индейца — кадр симулятора" loading="lazy">
+        </div>
+        <button type="button" class="sd-cme" id="sdCme"></button>
         <iframe title="Симулятор звезды М31" tabindex="-1"></iframe>
-        <div class="sd-load" data-i="sd.load">Зажигаем звезду…</div>
-        <span class="sd-tag" data-i="sd.tag">Live · звезда Барнарда</span>
-        <span class="sd-hint" data-i="sd.hint">Нажмите, чтобы вращать</span>
+        <div class="sd-load" id="sdLoad">Зажигаем звезду…</div>
+        <span class="sd-tag" id="sdTag">Звезда Барнарда · M4V</span>
+        <span class="sd-hint" id="sdHint"></span>
       </div>
-      <p class="sd-cap"><span data-i="sd.cap">Живая симуляция звезды Барнарда — красного карлика в 6 световых годах от нас: корона в ультрафиолете, магнитное поле, нагрев и вспышки. Модель сверена с Солнцем по снимкам SDO/AIA 171. Стенд для моей игры «Горизонт М31».</span> <a href="/star-sim/" target="_blank" rel="noopener" data-i="sd.open">Открыть стенд →</a></p>
+      <p class="sd-cap"><span id="sdCap"></span></p>
+      <p class="sd-gpu"><span id="sdGpu"></span> <button type="button" class="sd-run" id="sdRun"></button> <a href="/star-sim/" target="_blank" rel="noopener" id="sdOpen"></a></p>
     </div>
     <div class="about-txt rv">
       <div class="sec-num">05 / ABOUT</div>
@@ -455,7 +484,7 @@ const EN = {
  'ab.2':'My work ranges from indie game dev to <strong>government and academic commissions</strong>. Houdini, Unreal Engine, Python and machine learning are not separate skills for me — they are one pipeline.',
  'ab.3':'I keep learning: right now it is AI video, agentic tooling and reinforcement learning for robotics and drones.',
  'ct.h':'Let’s build something extraordinary','ct.p':'Tell me about your project: what you need, when, and the rough budget. I reply within 24 hours with a realistic estimate.',
- 'sd.load':'Igniting the star…','sd.hint':'Click to rotate','sd.tag':'Live · Barnard’s Star','sd.cap':'Live simulation of Barnard’s Star, a red dwarf 6 light-years away: ultraviolet corona, magnetic field, heating and flares. The model is calibrated on the Sun against SDO/AIA 171 images. A test bench for my game “Horizon M31”.','sd.open':'Open the bench →',
+
  'ct.fast':'Telegram · fastest','ct.yt':'Showreels','ft.name':'Alexander Rybashov'
 };
 const RU = {};
@@ -542,6 +571,6 @@ document.querySelectorAll('.w').forEach((card,i)=>{
   draw(); addEventListener('resize',draw);
 });
 </script>
-<script src="assets/star-demo.js?v=3" defer></script>
+<script src="assets/star-demo.js?v=7" defer></script>
 </body>
 </html>
