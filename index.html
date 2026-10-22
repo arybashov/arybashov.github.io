@@ -400,13 +400,13 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
 <section id="about" style="padding-top:40px">
   <div class="wrap about">
     <div class="rv">
-      <div class="star-demo" id="starDemo" data-src="/star-sim/" role="img" aria-label="Живая симуляция короны Солнца">
+      <div class="star-demo" id="starDemo" data-src="/star-sim/" data-preset="1" role="img" aria-label="Живая симуляция короны звезды Барнарда">
         <iframe title="Симулятор звезды М31" tabindex="-1"></iframe>
         <div class="sd-load" data-i="sd.load">Зажигаем звезду…</div>
-        <span class="sd-tag">Live · WebGL2</span>
+        <span class="sd-tag" data-i="sd.tag">Live · звезда Барнарда</span>
         <span class="sd-hint" data-i="sd.hint">Нажмите, чтобы вращать</span>
       </div>
-      <p class="sd-cap"><span data-i="sd.cap">Живая симуляция: корона Солнца в ультрафиолете, как на снимках SDO/AIA 171 — магнитное поле, нагрев, вспышки. Стенд для моей игры «Горизонт М31».</span> <a href="/star-sim/" target="_blank" rel="noopener" data-i="sd.open">Открыть стенд →</a></p>
+      <p class="sd-cap"><span data-i="sd.cap">Живая симуляция звезды Барнарда — красного карлика в 6 световых годах от нас: корона в ультрафиолете, магнитное поле, нагрев и вспышки. Модель сверена с Солнцем по снимкам SDO/AIA 171. Стенд для моей игры «Горизонт М31».</span> <a href="/star-sim/" target="_blank" rel="noopener" data-i="sd.open">Открыть стенд →</a></p>
     </div>
     <div class="about-txt rv">
       <div class="sec-num">05 / ABOUT</div>
@@ -472,7 +472,7 @@ const EN = {
  'ab.2':'My work ranges from indie game dev to <strong>government and academic commissions</strong>. Houdini, Unreal Engine, Python and machine learning are not separate skills for me — they are one pipeline.',
  'ab.3':'I keep learning: right now it is AI video, agentic tooling and reinforcement learning for robotics and drones.',
  'ct.h':'Let’s build something extraordinary','ct.p':'Tell me about your project: what you need, when, and the rough budget. I reply within 24 hours with a realistic estimate.',
- 'sd.load':'Igniting the star…','sd.hint':'Click to rotate','sd.cap':'Live simulation: the solar corona in ultraviolet, as in SDO/AIA 171 images — magnetic field, heating, flares. A test bench for my game “Horizon M31”.','sd.open':'Open the bench →',
+ 'sd.load':'Igniting the star…','sd.hint':'Click to rotate','sd.tag':'Live · Barnard’s Star','sd.cap':'Live simulation of Barnard’s Star, a red dwarf 6 light-years away: ultraviolet corona, magnetic field, heating and flares. The model is calibrated on the Sun against SDO/AIA 171 images. A test bench for my game “Horizon M31”.','sd.open':'Open the bench →',
  'ct.fast':'Telegram · fastest','ct.yt':'Showreels','ft.name':'Alexander Rybashov'
 };
 const RU = {};
@@ -559,6 +559,6 @@ document.querySelectorAll('.w').forEach((card,i)=>{
   draw(); addEventListener('resize',draw);
 });
 </script>
-<script src="assets/star-demo.js?v=1" defer></script>
+<script src="assets/star-demo.js?v=2" defer></script>
 </body>
 </html>
