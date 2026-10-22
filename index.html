@@ -7,10 +7,10 @@
 <meta name="description" content="Александр Рыбашов: 20+ лет в компьютерной графике. VFX и процедурные симуляции в Houdini, научная визуализация, AI-видео, геймдев на Unreal, инженерное 3D и Python/ML.">
 <meta property="og:title" content="Александр Рыбашов — VFX · Science Viz · AI · Engineering">
 <meta property="og:description" content="20+ лет в компьютерной графике. От симуляции частиц до физической детали в руках.">
-<meta property="og:image" content="https://arybashov.github.io/assets/og.jpg">
+<meta property="og:image" content="https://arybashov.github.io/assets/og.jpg?v=3">
 <meta property="og:url" content="https://arybashov.github.io/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://arybashov.github.io/assets/og.jpg">
+<meta name="twitter:image" content="https://arybashov.github.io/assets/og.jpg?v=3">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0c10'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%23ff6a2b' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%2353d6c6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,25 +48,29 @@ nav.solid{background:rgba(11,12,16,.82);backdrop-filter:blur(14px);border-color:
 @media(max-width:820px){.nav-links{display:none}}
 
 /* HERO */
-.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;overflow:hidden}
-#flow{position:absolute;inset:0;width:100%;height:100%}
-.hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 50%,rgba(11,12,16,.55),transparent 70%),linear-gradient(to bottom,transparent 70%,var(--bg));pointer-events:none}
-.hero-in{position:relative;z-index:2;padding-top:90px;padding-bottom:60px}
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--bg)}
+.hero-bg{position:absolute;inset:0;background:url(assets/solar.jpg?v=3) 30% 30%/cover no-repeat;transform:scale(1.04);animation:heroIn 2.4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes heroIn{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:scale(1.04)}}
+@media(max-width:700px){.hero-bg{bottom:34%;background-position:34% 40%}.hero::after{background:linear-gradient(to bottom,rgba(11,12,16,.5) 0%,transparent 14%,transparent 40%,var(--bg) 66%)}.hero .lead{font-size:16px}}
+#flow{position:absolute;inset:0;width:100%;height:100%;z-index:1;mix-blend-mode:screen}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(11,12,16,.55) 0%,transparent 16%,transparent 48%,rgba(11,12,16,.8) 72%,var(--bg) 100%);pointer-events:none}
+.hero-in{position:relative;z-index:2;padding-top:90px;padding-bottom:70px;width:100%}
 .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cool);display:flex;align-items:center;gap:10px;margin-bottom:26px}
 .kicker::before{content:'';width:28px;height:1px;background:var(--cool)}
-h1{font-family:var(--head);font-weight:800;font-size:clamp(40px,8.2vw,108px);line-height:.98;letter-spacing:-.035em}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(38px,6vw,92px);line-height:1;letter-spacing:-.035em;text-shadow:0 4px 40px rgba(0,0,0,.6)}
 h1 .grad{background:linear-gradient(90deg,var(--hot),var(--hot2));-webkit-background-clip:text;background-clip:text;color:transparent}
-.lead{max-width:600px;font-size:clamp(17px,2vw,20px);color:#c4c7d0;margin:28px 0 38px}
+.lead{max-width:620px;font-size:clamp(17px,1.9vw,20px);color:#d0d2d9;margin:22px 0 32px;text-shadow:0 1px 18px rgba(0,0,0,.9)}
 .cta{display:flex;gap:14px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:99px;font-weight:700;font-size:15px;transition:transform .2s,background .2s,border-color .2s}
 .btn-hot{background:var(--hot);color:#140800}
 .btn-hot:hover{background:var(--hot2);transform:translateY(-2px)}
 .btn-ghost{border:1px solid var(--line2);background:rgba(20,22,29,.6);backdrop-filter:blur(6px)}
 .btn-ghost:hover{border-color:var(--text)}
-.stats{display:grid;grid-template-columns:repeat(4,auto);gap:44px;margin-top:70px;width:max-content;max-width:100%}
+.stats-strip{border-bottom:1px solid var(--line);padding:34px 0}
+.stats{display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:44px}
 .stat b{display:block;font-family:var(--head);font-size:clamp(26px,3.4vw,40px);font-weight:600;letter-spacing:-.02em}
 .stat span{font-size:13px;color:var(--muted)}
-@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr);gap:26px;width:100%}}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr);gap:26px}}
 .hint{position:absolute;z-index:2;bottom:26px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.2em}
 
 /* SECTIONS */
@@ -105,17 +109,6 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
 .w h3{font-family:var(--head);font-size:22px;font-weight:600;letter-spacing:-.015em;margin-bottom:10px}
 .w p{font-size:14.5px;color:var(--muted);margin-bottom:18px}
 .tag-rd{color:var(--cool)}
-
-/* SOLAR BAND */
-.band{position:relative;overflow:hidden;padding:0;margin:40px 0 0;aspect-ratio:16/9;max-height:100vh;width:100%}
-.band-bg{position:absolute;inset:-3% 0;background:url(assets/solar.jpg) center/cover no-repeat;will-change:transform}
-.band::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,var(--bg) 0%,transparent 14%,transparent 52%,rgba(11,12,16,.85) 80%,var(--bg) 100%)}
-.band .wrap{position:absolute;z-index:2;left:0;right:0;bottom:6%}
-.band-txt{max-width:640px}
-.band h2{font-size:clamp(28px,4vw,54px);margin-bottom:14px;text-shadow:0 2px 30px rgba(0,0,0,.7)}
-.band p{color:#d6d8de;font-size:17px;max-width:520px;text-shadow:0 1px 18px rgba(0,0,0,.9)}
-.band .chips{margin-top:18px}
-@media(max-width:860px){.band{aspect-ratio:auto;max-height:none}.band-bg{position:relative;inset:auto;aspect-ratio:16/9;transform:none!important}.band::before{background:linear-gradient(to bottom,var(--bg),transparent 10%,transparent 40%,var(--bg) 56vw)}.band .wrap{position:relative;bottom:auto;margin-top:-14vw;padding-bottom:40px}}
 
 /* STACK */
 .stack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
@@ -193,24 +186,28 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
 </nav>
 
 <header class="hero" id="top">
+  <div class="hero-bg" role="img" aria-label="Александр Рыбашов и визуализация поверхности Солнца"></div>
   <canvas id="flow" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
     <div class="kicker" data-i="hero.kicker">VFX · Science Viz · AI · Game Dev · Engineering</div>
-    <h1><span data-i="hero.name1">Александр</span><br><span class="grad" data-i="hero.name2">Рыбашов</span></h1>
-    <p class="lead" data-i="hero.lead">20+ лет в компьютерной графике. Строю визуальные системы для науки, кино и игр — от симуляции частиц в Houdini до физической детали, напечатанной на 3D-принтере.</p>
+    <h1><span data-i="hero.name1">Александр</span> <span class="grad" data-i="hero.name2">Рыбашов</span></h1>
+    <p class="lead" data-i="hero.lead">Визуализирую то, что нельзя увидеть глазом. 20+ лет в компьютерной графике: наука, кино и игры — от симуляции плазмы в Houdini до детали, напечатанной на 3D-принтере.</p>
     <div class="cta">
       <a class="btn btn-hot" href="https://t.me/arybashov" target="_blank" rel="noopener" data-i="hero.cta1">Написать в Telegram →</a>
       <a class="btn btn-ghost" href="#work" data-i="hero.cta2">Смотреть проекты</a>
     </div>
+  </div>
+  <div class="hint" data-i="hero.hint">ДВИГАЙТЕ КУРСОРОМ</div>
+</header>
+
+<div class="stats-strip"><div class="wrap">
     <div class="stats">
       <div class="stat"><b>20+</b><span data-i="st.1">лет в CG</span></div>
       <div class="stat"><b>3</b><span data-i="st.2">научных института</span></div>
       <div class="stat"><b>6</b><span data-i="st.3">дисциплин в одном пайплайне</span></div>
       <div class="stat"><b>∞</b><span data-i="st.4">полный цикл</span></div>
     </div>
-  </div>
-  <div class="hint" data-i="hero.hint">ДВИГАЙТЕ КУРСОРОМ</div>
-</header>
+</div></div>
 
 <!-- SKILLS -->
 <section id="skills">
@@ -336,19 +333,6 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
   </div>
 </section>
 
-<!-- SOLAR BAND -->
-<section class="band" id="science" aria-label="Science visualization">
-  <div class="band-bg" id="bandBg"></div>
-  <div class="wrap">
-    <div class="band-txt rv">
-      <div class="sec-num">SCIENCE × ART</div>
-      <h2 data-i="band.h">Визуализирую то, что нельзя увидеть глазом</h2>
-      <p data-i="band.p">Грануляция солнечной поверхности, потоки плазмы, математические модели. Точность исследования — и язык кино, чтобы её почувствовать.</p>
-      <div class="chips"><span class="chip">Houdini</span><span class="chip">Science Viz</span><span class="chip">Plasma</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- STACK -->
 <section id="stack" style="padding-top:40px">
   <div class="wrap">
@@ -407,7 +391,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
 <!-- ABOUT -->
 <section id="about" style="padding-top:40px">
   <div class="wrap about">
-    <div class="photo rv" id="portrait" data-src="assets/portrait.jpg"><img src="assets/portrait.jpg" alt="Александр Рыбашов" loading="lazy"><canvas aria-hidden="true"></canvas><span class="photo-hint" data-i="ph.hint">Наведите · нажмите</span></div>
+    <div class="photo rv" id="portrait" data-src="assets/portrait.jpg?v=3"><img src="assets/portrait.jpg?v=3" alt="Александр Рыбашов" loading="lazy"><canvas aria-hidden="true"></canvas><span class="photo-hint" data-i="ph.hint">Наведите · нажмите</span></div>
     <div class="about-txt rv">
       <div class="sec-num">05 / ABOUT</div>
       <p data-i="ab.1">Больше двадцати лет я работаю на стыке <strong>искусства и технологий</strong>: создаю визуальные системы для игр, науки и экрана.</p>
@@ -440,7 +424,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
 const EN = {
  'nav.skills':'Skills','nav.work':'Work','nav.stack':'Stack','nav.about':'About','nav.contact':'Contact',
  'hero.name1':'Alexander','hero.name2':'Rybashov',
- 'hero.lead':'20+ years in computer graphics. I build visual systems for science, film and games — from Houdini particle simulations to a physical part fresh off the 3D printer.',
+ 'hero.lead':'I visualize what the eye cannot see. 20+ years in computer graphics: science, film and games — from Houdini plasma simulations to a part fresh off the 3D printer.',
  'hero.cta1':'Message on Telegram →','hero.cta2':'See the work','hero.hint':'MOVE YOUR CURSOR',
  'st.1':'years in CG','st.2':'research institutions','st.3':'disciplines, one pipeline','st.4':'full cycle',
  'sk.h':'Six disciplines — one person','sk.sub':'Not a patchwork of freelancers but one pipeline: concept, simulation, render, code and production in the same hands.',
@@ -472,8 +456,6 @@ const EN = {
  'ab.2':'My work ranges from indie game dev to <strong>government and academic commissions</strong>. Houdini, Unreal Engine, Python and machine learning are not separate skills for me — they are one pipeline.',
  'ab.3':'I keep learning: right now it is AI video, agentic tooling and reinforcement learning for robotics and drones.',
  'ct.h':'Let’s build something extraordinary','ct.p':'Tell me about your project: what you need, when, and the rough budget. I reply within 24 hours with a realistic estimate.',
- 'band.h':'I visualize what the eye cannot see',
- 'band.p':'Solar surface granulation, plasma flows, mathematical models. Research-grade accuracy — told in the language of cinema so you can feel it.',
  'ph.hint':'Hover · tap',
  'ct.fast':'Telegram · fastest','ct.yt':'Showreels','ft.name':'Alexander Rybashov'
 };
@@ -496,9 +478,6 @@ addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
-const bandBg=document.getElementById('bandBg');
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&bandBg){addEventListener('scroll',()=>{const r=bandBg.parentElement.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight||innerWidth<860)return;bandBg.style.transform=`translateY(${(r.top+r.height/2-innerHeight/2)*-.12}px) scale(1.04)`},{passive:true})}
-
 const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ---------- hero flow field ---------- */
@@ -510,8 +489,8 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function resize(){
     dpr=Math.min(devicePixelRatio||1,2);
     W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
-    x.fillStyle='#0b0c10';x.fillRect(0,0,W,H);
-    const N=Math.min(1600,Math.floor(W*H/900));
+    x.clearRect(0,0,W,H);
+    const N=Math.min(1100,Math.floor(W*H/1300));
     P=Array.from({length:N},()=>spawn());
   }
   function spawn(){return{x:Math.random()*W,y:Math.random()*H,l:Math.random()*200+60,h:Math.random()}}
@@ -519,7 +498,7 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
   function frame(){
     t+=.005;
-    x.fillStyle='rgba(11,12,16,.075)';x.fillRect(0,0,W,H);
+    x.globalCompositeOperation='destination-out';x.fillStyle='rgba(0,0,0,.09)';x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
     x.lineWidth=1;
     for(const p of P){
       const s=.0022;
@@ -528,7 +507,7 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
       const dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy;
       if(d2<26000){const f=(1-d2/26000)*3.2;vx+=(-dy/Math.sqrt(d2+1))*f;vy+=(dx/Math.sqrt(d2+1))*f;}
       const ox=p.x,oy=p.y; p.x+=vx;p.y+=vy;p.l--;
-      x.strokeStyle=p.h>.82?'rgba(83,214,198,.55)':(p.h>.4?'rgba(255,106,43,.5)':'rgba(255,176,59,.35)');
+      x.strokeStyle=p.h>.82?'rgba(83,214,198,.7)':(p.h>.4?'rgba(255,140,60,.55)':'rgba(255,190,90,.4)');
       x.beginPath();x.moveTo(ox,oy);x.lineTo(p.x,p.y);x.stroke();
       if(p.l<0||p.x<-5||p.x>W+5||p.y<-5||p.y>H+5)Object.assign(p,spawn());
     }
@@ -564,6 +543,6 @@ document.querySelectorAll('.w').forEach((card,i)=>{
   draw(); addEventListener('resize',draw);
 });
 </script>
-<script src="assets/portrait.js" defer></script>
+<script src="assets/portrait.js?v=3" defer></script>
 </body>
 </html>
