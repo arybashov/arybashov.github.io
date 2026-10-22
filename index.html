@@ -290,7 +290,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
         <p data-i="w2.p">Фотореалистичный ролик о будущем городской мобильности: дизайн дрона и полёты над городом.</p>
         <div class="chips"><span class="chip">Unreal Engine</span><span class="chip">Houdini</span><span class="chip">Blender</span><span class="chip">DaVinci</span></div>
       </article>
-      <article class="w rv" data-art="grid">
+      <article class="w big rv" data-art="grid">
         <canvas class="w-art"></canvas>
         <div class="w-top"><span>003</span><span>SCIENCE VIZ</span></div>
         <div class="w-client" data-i="w4.c">Научный институт</div>
@@ -298,17 +298,9 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
         <p data-i="w4.p">Долгосрочное сотрудничество: графические модели для научных исследований.</p>
         <div class="chips"><span class="chip">Research</span></div>
       </article>
-      <article class="w rv" data-art="burst">
+      <article class="w big rv" data-art="pins">
         <canvas class="w-art"></canvas>
-        <div class="w-top"><span>004</span><span>MOTION</span></div>
-        <div class="w-client" data-i="w5.c">Детский центр</div>
-        <h3 data-i="w5.h">Заставка промо-фильма</h3>
-        <p data-i="w5.p">Символ единства и энергии: частицы в Houdini собираются в динамичный логотип.</p>
-        <div class="chips"><span class="chip">Houdini</span><span class="chip">Particles</span></div>
-      </article>
-      <article class="w rv" data-art="pins">
-        <canvas class="w-art"></canvas>
-        <div class="w-top"><span>005</span><span>GAME · iOS</span></div>
+        <div class="w-top"><span>004</span><span>GAME · iOS</span></div>
         <div class="w-client" data-i="w6.c">Инди-игра</div>
         <h3>Gorodki 3D</h3>
         <p data-i="w6.p">Полный цикл: геймплей, 3D-ассеты, оптимизация под мобильные устройства.</p>
@@ -316,7 +308,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
       </article>
       <article class="w big rv" data-art="path">
         <canvas class="w-art"></canvas>
-        <div class="w-top"><span>006</span><span class="tag-rd">R&amp;D</span></div>
+        <div class="w-top"><span>005</span><span class="tag-rd">R&amp;D</span></div>
         <div class="w-client" data-i="w7.c">Собственная разработка</div>
         <h3 data-i="w7.h">Лётная школа для дронов</h3>
         <p data-i="w7.p">Симулятор с 6-DOF динамикой: автопилот плюс обучение с подкреплением для наведения и групповых сценариев.</p>
@@ -324,7 +316,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
       </article>
       <article class="w big rv" data-art="reel">
         <canvas class="w-art"></canvas>
-        <div class="w-top"><span>007</span><span>REEL</span></div>
+        <div class="w-top"><span>006</span><span>REEL</span></div>
         <div class="w-client">Showreel</div>
         <h3>DEMO 2025</h3>
         <p data-i="w8.p">Фрагменты разных проектов в одном ролике — диапазон навыков и технологий.</p>
@@ -448,7 +440,6 @@ const EN = {
  'w2.c':'Drone manufacturer',
  'w2.h':'Passenger drone promo','w2.p':'A photoreal film about the future of urban mobility: drone design and flights over the city.',
  'w4.c':'Research institute','w4.h':'Models for computational math','w4.p':'Long-term collaboration: graphic models for scientific research.',
- 'w5.c':'Youth center','w5.h':'Promo film title sequence','w5.p':'A symbol of unity and energy: Houdini particles assemble into a dynamic logo.',
  'w6.c':'Indie game','w6.p':'Full cycle: gameplay, 3D assets, mobile optimization.',
  'w7.c':'In-house R&D','w7.h':'Flight school for drones','w7.p':'A 6-DOF dynamics simulator: autopilot plus reinforcement learning for guidance and swarm scenarios.',
  'w8.p':'Clips from many projects in one reel — the range of skills and tools.','w8.l':'Watch on YouTube →',
@@ -551,6 +542,6 @@ document.querySelectorAll('.w').forEach((card,i)=>{
   draw(); addEventListener('resize',draw);
 });
 </script>
-<script src="assets/star-demo.js?v=2" defer></script>
+<script src="assets/star-demo.js?v=3" defer></script>
 </body>
 </html>

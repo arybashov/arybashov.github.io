@@ -50,7 +50,10 @@
   function load() {
     if (loaded) return;
     loaded = true;
-    frame.src = box.dataset.src;
+    // on the real site the stand is same-origin; elsewhere (a copy, a preview without ./star-sim) use the published stand
+    let src = box.dataset.src;
+    if (location.hostname !== 'arybashov.github.io' && location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') src = 'https://arybashov.github.io' + src;
+    frame.src = src;
   }
 
   const io = new IntersectionObserver(es => es.forEach(e => {
