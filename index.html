@@ -108,7 +108,7 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
 
 /* SOLAR BAND */
 .band{position:relative;overflow:hidden;padding:0;margin:40px 0 0;aspect-ratio:16/9;max-height:100vh;width:100%}
-.band-bg{position:absolute;inset:-8% 0;background:url(assets/solar.jpg) center/cover no-repeat;will-change:transform}
+.band-bg{position:absolute;inset:-3% 0;background:url(assets/solar.jpg) center/cover no-repeat;will-change:transform}
 .band::before{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,var(--bg) 0%,transparent 14%,transparent 52%,rgba(11,12,16,.85) 80%,var(--bg) 100%)}
 .band .wrap{position:absolute;z-index:2;left:0;right:0;bottom:6%}
 .band-txt{max-width:640px}
@@ -126,6 +126,10 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
 .s ul{list-style:none}
 .s li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}
 .s li span{color:var(--dim);font-size:13px;text-align:right}
+.s li .tn{display:flex;align-items:center;gap:10px;font-weight:500}
+.s li .tn em{font-style:normal}
+.ics{display:inline-flex;gap:4px;flex-shrink:0}
+.ics img,.ics svg{width:18px;height:18px;object-fit:contain;border-radius:4px}
 
 /* WHY */
 .why{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
@@ -226,13 +230,13 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
         <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="10"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M10 38l4-4M34 14l4-4"/></svg>
         <h3 data-i="d2.h">Научная визуализация</h3>
         <p data-i="d2.p">Точные модели сложных явлений для исследований и образования: поверхность Солнца, плазма, вычислительная математика.</p>
-        <div class="chips"><span class="chip">Univ. of Toronto</span><span class="chip">ИПМ Келдыша</span><span class="chip">Houdini</span></div>
+        <div class="chips"><span class="chip">ИПМ Келдыша</span><span class="chip">Астрофизика</span><span class="chip">Houdini</span></div>
       </div>
       <div class="d">
         <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="10" width="36" height="26" rx="4"/><path d="M20 18l10 5-10 5z"/><path d="M14 42h20"/></svg>
         <h3 data-i="d3.h">AI-видео продакшн</h3>
         <p data-i="d3.p">Генеративное видео с профессиональным композом и motion-графикой. Промпт-инжиниринг, серии и кампании.</p>
-        <div class="chips"><span class="chip">Sora</span><span class="chip">Kling</span><span class="chip">Runway</span><span class="chip">Veo</span><span class="chip">Grok</span></div>
+        <div class="chips"><span class="chip">Kling</span><span class="chip">Higgsfield</span><span class="chip">ChatGPT</span><span class="chip">Claude</span></div>
       </div>
       <div class="d">
         <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 18h32v16a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z"/><path d="M16 26h6M19 23v6"/><circle cx="31" cy="25" r="1.5"/><circle cx="34" cy="29" r="1.5"/><path d="M18 18l2-8h8l2 8"/></svg>
@@ -270,7 +274,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
         <div class="w-client" data-i="w1.c">Роскосмос</div>
         <h3 data-i="w1.h">«Внутренний космос»</h3>
         <p data-i="w1.p">Философский фильм: путь от наблюдения Вселенной к безграничности человеческого сознания. Генеративный AI в официальном проекте.</p>
-        <div class="chips"><span class="chip">ChatGPT</span><span class="chip">Sora</span><span class="chip">Kling</span><span class="chip">Runway</span></div>
+        <div class="chips"><span class="chip">ChatGPT</span><span class="chip">Kling</span></div>
       </article>
       <article class="w big rv" data-art="drone">
         <canvas class="w-art"></canvas>
@@ -283,7 +287,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
       <article class="w rv" data-art="sun">
         <canvas class="w-art"></canvas>
         <div class="w-top"><span>003</span><span>SCIENCE VIZ</span></div>
-        <div class="w-client">University of Toronto</div>
+        <div class="w-client" data-i="w3.c">Научная визуализация</div>
         <h3 data-i="w3.h">Поверхность Солнца</h3>
         <p data-i="w3.p">Грануляция, протуберанцы и вспышки — процедурная симуляция плазмы для исследований.</p>
         <div class="chips"><span class="chip">Houdini</span></div>
@@ -340,7 +344,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
       <div class="sec-num">SCIENCE × ART</div>
       <h2 data-i="band.h">Визуализирую то, что нельзя увидеть глазом</h2>
       <p data-i="band.p">Грануляция солнечной поверхности, потоки плазмы, математические модели. Точность исследования — и язык кино, чтобы её почувствовать.</p>
-      <div class="chips"><span class="chip">University of Toronto</span><span class="chip">Houdini</span><span class="chip">Science Viz</span></div>
+      <div class="chips"><span class="chip">Houdini</span><span class="chip">Science Viz</span><span class="chip">Plasma</span></div>
     </div>
   </div>
 </section>
@@ -354,34 +358,32 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
     </div>
     <div class="stack rv">
       <div class="s"><h4>3D / VFX</h4><ul>
-        <li>Houdini <span data-i="t.hou">симуляции, процедурка</span></li>
-        <li>Blender <span data-i="t.bl">моделинг, скульпт, рендер</span></li>
-        <li>Cinema 4D <span>motion</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/houdini.svg" alt="" width="18" height="18" loading="lazy"></i><em>Houdini</em></b><span data-i="t.hou">симуляции, процедурка</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/blender.svg" alt="" width="18" height="18" loading="lazy"></i><em>Blender</em></b><span data-i="t.bl">моделинг, скульпт, рендер</span></li>
       </ul></div>
       <div class="s"><h4>Real-time</h4><ul>
-        <li>Unreal Engine <span data-i="t.ue">игры, VR, шейдеры</span></li>
-        <li>Unity <span>mobile / iOS</span></li>
-        <li>Three.js / WebGL <span>web 3D</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/unrealengine.svg" alt="" width="18" height="18" loading="lazy"></i><em>Unreal Engine</em></b><span data-i="t.ue">игры, VR, шейдеры</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/unity.svg" alt="" width="18" height="18" loading="lazy"></i><em>Unity</em></b><span>mobile / iOS</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/threedotjs.svg" alt="" width="18" height="18" loading="lazy"></i><em>Three.js / WebGL</em></b><span>web 3D</span></li>
       </ul></div>
       <div class="s"><h4>Post</h4><ul>
-        <li>Nuke <span data-i="t.nk">композитинг</span></li>
-        <li>After Effects <span>motion graphics</span></li>
-        <li>DaVinci Resolve <span data-i="t.dv">монтаж, цвет</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/nuke.svg" alt="" width="18" height="18" loading="lazy"></i><em>Nuke</em></b><span data-i="t.nk">композитинг</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/adobeaftereffects.svg" alt="" width="18" height="18" loading="lazy"></i><em>After Effects</em></b><span>motion graphics</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/davinciresolve.svg" alt="" width="18" height="18" loading="lazy"></i><em>DaVinci Resolve</em></b><span data-i="t.dv">монтаж, цвет</span></li>
       </ul></div>
       <div class="s"><h4>AI</h4><ul>
-        <li>Sora · Kling · Veo <span data-i="t.vid">видео</span></li>
-        <li>Runway · Grok <span data-i="t.gen">генерация</span></li>
-        <li>Claude · ChatGPT <span data-i="t.ag">агенты, сценарии</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/kling.png" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/higgsfield.svg" alt="" width="18" height="18" loading="lazy"></i><em>Kling · Higgsfield</em></b><span data-i="t.vid">генерация видео</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/claude.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/openai.svg" alt="" width="18" height="18" loading="lazy"></i><em>Claude · ChatGPT</em></b><span data-i="t.ag">агенты, сценарии</span></li>
       </ul></div>
       <div class="s"><h4>Engineering</h4><ul>
-        <li>Fusion 360 <span data-i="t.cad">параметрическое CAD</span></li>
-        <li>FDM / FFF <span data-i="t.pr">3D-печать</span></li>
-        <li data-i="t.mill">Фрезеровка, допуски <span>CNC</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/autodesk.svg" alt="" width="18" height="18" loading="lazy"></i><em>Fusion 360</em></b><span data-i="t.cad">параметрическое CAD</span></li>
+        <li><b class="tn"><i class="ics"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#53d6c6" stroke-width="1.8"><path d="M4 4h16v5H4zM12 9v4M8 20l4-7 4 7zM5 20h14"/></svg></i><em>FDM / FFF</em></b><span data-i="t.pr">3D-печать</span></li>
+        <li><b class="tn"><i class="ics"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ffb03b" stroke-width="1.8"><path d="M9 3h6v6l-3 3-3-3zM12 12v6M6 21h12"/></svg></i><em data-i="t.mill">Фрезеровка, допуски</em></b><span>CNC</span></li>
       </ul></div>
       <div class="s"><h4>Code</h4><ul>
-        <li>Python <span>tools, ML, pipeline</span></li>
-        <li>PyTorch · OpenCV <span>CV / RL</span></li>
-        <li>C++ · Java · JS <span>sim, games, web</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy"></i><em>Python</em></b><span>tools, ML, pipeline</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/pytorch.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/opencv.svg" alt="" width="18" height="18" loading="lazy"></i><em>PyTorch · OpenCV</em></b><span>CV / RL</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/cplusplus.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/openjdk.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/javascript.svg" alt="" width="18" height="18" loading="lazy"></i><em>C++ · Java · JS</em></b><span>sim, games, web</span></li>
       </ul></div>
     </div>
   </div>
@@ -451,6 +453,7 @@ const EN = {
  'wk.h':'Selected work','wk.sub':'From government and academic commissions to indie games and in-house R&D systems.',
  'w1.c':'Roscosmos','w1.h':'“Inner Cosmos”','w1.p':'A philosophical film: from observing the Universe to the boundlessness of human consciousness. Generative AI in an official project.',
  'w2.h':'Passenger drone promo','w2.p':'A photoreal film about the future of urban mobility: drone design and flights over the city.',
+ 'w3.c':'Scientific visualization',
  'w3.h':'Solar surface','w3.p':'Granulation, prominences and flares — a procedural plasma simulation for research.',
  'w4.c':'Keldysh Institute','w4.h':'Models for computational math','w4.p':'Long-term collaboration: graphic models for scientific research.',
  'w5.c':'Orlyonok Center','w5.h':'Promo film title sequence','w5.p':'A symbol of unity and energy: Houdini particles assemble into a dynamic logo.',
@@ -459,7 +462,7 @@ const EN = {
  'w8.p':'Clips from many projects in one reel — the range of skills and tools.','w8.l':'Watch on YouTube →',
  'stk.h':'Tools','stk.sub':'I pick the tool for the task, not the task for the tool.',
  't.hou':'simulation, procedural','t.bl':'modeling, sculpt, render','t.ue':'games, VR, shaders','t.nk':'compositing','t.dv':'edit, color',
- 't.vid':'video','t.gen':'generation','t.ag':'agents, scripts','t.cad':'parametric CAD','t.pr':'3D printing','t.mill':'Milling, tolerances <span>CNC</span>',
+ 't.vid':'video generation','t.ag':'agents, scripts','t.cad':'parametric CAD','t.pr':'3D printing','t.mill':'Milling, tolerances',
  'why.h':'Why work with me',
  'y1.h':'Full cycle','y1.p':'From idea and concept to the final render or a part in your hands — no extra contractors.',
  'y2.h':'Technical depth','y2.p':'Code, simulation and ML where a typical artist hits the limits of the tool.',
