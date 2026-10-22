@@ -8,10 +8,10 @@
   <style>
     .top-nav{display:var(--hide-topnav,flex)}
   </style>
-  <script type="module" crossorigin src="./assets/simulation-v2.js"></script>
-  <script type="module" crossorigin src="./assets/app-v2.js"></script>
+  <script type="module" crossorigin src="./assets/simulation-v3.js"></script>
+  <script type="module" crossorigin src="./assets/app-v3.js"></script>
   <link rel="stylesheet" crossorigin href="./assets/styles-Grn9g-We.css">
-  <link rel="stylesheet" href="./assets/theme.css">
+  <link rel="stylesheet" href="./assets/theme.css?v=3">
 </head>
 <body>
   
@@ -94,28 +94,28 @@
 
   <main class="main">
     <aside class="sidebar">
-      <section class="panel">
+      <section class="panel command-panel">
+        <div class="panel-title">Управление</div>
+        <div class="btn-row">
+          <button id="btnPause" type="button" aria-pressed="false">▶ Старт</button>
+          <button id="btnReset" type="button">↺ Новый сценарий</button>
+        </div>
+        <div class="ctrl speed-ctrl">
+          <label for="runSpeed">Скорость прогона</label>
+          <input type="range" min="1" max="100" value="1" step="1" id="runSpeed">
+          <span id="runSpeedV">1x</span>
+        </div>
+      </section>
+
+      <section class="panel parameters-panel">
         <div class="panel-title">Параметры</div>
-        <div class="controls">
+        <div class="parameter-group threat">
+          <h2 class="group-title">Угроза</h2>
+          <div class="controls">
           <div class="ctrl">
             <label for="dspeed">Скорость дрона (км/ч)</label>
             <input type="range" min="80" max="300" value="200" step="10" id="dspeed">
             <span id="dspeedV">200</span>
-          </div>
-          <div class="ctrl">
-            <label for="aspeed">Скорость антидрона (км/ч)</label>
-            <input type="range" min="150" max="500" value="350" step="10" id="aspeed">
-            <span id="aspeedV">350</span>
-          </div>
-          <div class="ctrl">
-            <label for="camrange">Дальность камеры (м)</label>
-            <input type="range" min="300" max="2500" value="900" step="50" id="camrange">
-            <span id="camrangeV">900</span>
-          </div>
-          <div class="ctrl">
-            <label for="arange">Дальность антидрона (м)</label>
-            <input type="range" min="200" max="1000" value="650" step="50" id="arange">
-            <span id="arangeV">650</span>
           </div>
           <div class="ctrl">
             <label for="ndrones">Кол-во дронов</label>
@@ -123,45 +123,54 @@
             <span id="ndronesV">5</span>
           </div>
           <div class="ctrl">
+            <label for="adelay">Задержка вылета (с)</label>
+            <input type="range" min="0" max="30" value="5" step="1" id="adelay">
+            <span id="adelayV">5</span>
+          </div>
+          </div>
+        </div>
+        <div class="parameter-group defense">
+          <h2 class="group-title">Оборона</h2>
+          <div class="controls">
+          <div class="ctrl">
+            <label for="aspeed">Скорость антидрона (км/ч)</label>
+            <input type="range" min="150" max="500" value="350" step="10" id="aspeed">
+            <span id="aspeedV">350</span>
+          </div>
+          <div class="ctrl">
+            <label for="arange">Дальность антидрона (м)</label>
+            <input type="range" min="200" max="1000" value="650" step="50" id="arange">
+            <span id="arangeV">650</span>
+          </div>
+          <div class="ctrl">
             <label for="nanti">Кол-во антидронов</label>
             <input type="range" min="0" max="15" value="5" step="1" id="nanti">
             <span id="nantiV">5</span>
           </div>
           <div class="ctrl">
-            <label for="adelay">Задержка вылета (с)</label>
-            <input type="range" min="0" max="30" value="5" step="1" id="adelay">
-            <span id="adelayV">5</span>
+            <label for="camrange">Дальность камеры (м)</label>
+            <input type="range" min="300" max="2500" value="900" step="50" id="camrange">
+            <span id="camrangeV">900</span>
+          </div>
           </div>
         </div>
       </section>
 
-      <section class="panel">
-        <div class="btn-row">
-          <button id="btnPause" type="button" aria-pressed="false">▶ Старт</button>
-          <button id="btnReset" type="button">↺ Новый сценарий</button>
-        </div>
-        <div class="ctrl speed-ctrl">
-          <label for="runSpeed">Скорость</label>
-          <input type="range" min="1" max="100" value="1" step="1" id="runSpeed">
-          <span id="runSpeedV">1x</span>
-        </div>
-      </section>
-
-      <section class="panel">
+      <section class="panel statistics-panel">
         <div class="panel-title">Статистика</div>
         <div class="stats-row">
-          <div class="stat">Дроны: <b id="sDrones">5</b></div>
-          <div class="stat stat-hit">Поразили цель: <b id="sHits">0</b></div>
-          <div class="stat stat-int">Перехвачено: <b id="sInt">0</b></div>
-          <div class="stat stat-ad">Антидроны: <b id="sAD">0</b></div>
-          <div class="stat stat-time">Время: <b id="sTime">0</b>с</div>
-          <div class="stat stat-time">Эпизод: <b id="sEpisode">0 / -</b>с</div>
-          <div class="stat stat-reward">Награда: <b id="sReward">0</b></div>
-          <div class="stat stat-reward">Шаг: <b id="sLastReward">0</b></div>
+          <div class="stat"><b id="sDrones">5</b><span class="stat-label">Дроны</span></div>
+          <div class="stat stat-hit"><b id="sHits">0</b><span class="stat-label">Поразили цель</span></div>
+          <div class="stat stat-int"><b id="sInt">0</b><span class="stat-label">Перехвачено</span></div>
+          <div class="stat stat-ad"><b id="sAD">0</b><span class="stat-label">Антидроны</span></div>
+          <div class="stat stat-time"><b id="sTime">0</b><span class="stat-label">Время · с</span></div>
+          <div class="stat stat-time"><b id="sEpisode">0 / -</b><span class="stat-label">Эпизод · с</span></div>
+          <div class="stat stat-reward"><b id="sReward">0</b><span class="stat-label">Награда</span></div>
+          <div class="stat stat-reward"><b id="sLastReward">0</b><span class="stat-label">Шаг</span></div>
         </div>
       </section>
 
-      <section class="panel">
+      <section class="panel secondary-panel">
         <div class="panel-title">Физика (3D)</div>
         <div class="ml-row"><span>Высота крейс.</span><b>30 м</b></div>
         <div class="ml-row"><span>Диапазон высот</span><b>15–250 м</b></div>
@@ -172,13 +181,13 @@
         <div class="ml-row"><span>Инерция антидрона</span><b>0.22 с</b></div>
       </section>
 
-      <section class="panel">
+      <section class="panel secondary-panel">
         <div class="panel-title">Легенда</div>
         <div class="legend">
-          <div class="leg-item"><div class="leg-dot" style="background:#5ba3e8"></div>Дрон (цвет = высота)</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#e04b4b"></div>Антидрон</div>
-          <div class="leg-item"><div class="leg-dot" style="background:rgba(100,160,255,0.6)"></div>Камера обнаружения</div>
-          <div class="leg-item"><div class="leg-dot" style="background:#e8a830"></div>Цель</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#53d6c6"></div>Дрон (цвет = высота)</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#ff6a2b"></div>Антидрон</div>
+          <div class="leg-item"><div class="leg-dot" style="background:rgba(83,214,198,0.45)"></div>Камера обнаружения</div>
+          <div class="leg-item"><div class="leg-dot" style="background:#ffb03b"></div>Цель</div>
         </div>
       </section>
 
