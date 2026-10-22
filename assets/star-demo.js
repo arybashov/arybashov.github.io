@@ -10,7 +10,7 @@
   const frame = box.querySelector('iframe');
   const slides = [...box.querySelectorAll('.sd-slides img')];
   const $ = id => document.getElementById(id);
-  const cmeBtn = $('sdCme'), tag = $('sdTag'), hint = $('sdHint'), cap = $('sdCap'), gpu = $('sdGpu'), run = $('sdRun'), open = $('sdOpen'), load = $('sdLoad');
+  const tag = $('sdTag'), hint = $('sdHint'), cap = $('sdCap'), gpu = $('sdGpu'), run = $('sdRun'), open = $('sdOpen'), load = $('sdLoad');
 
   const T = {
     ru: {
@@ -26,8 +26,7 @@
       rotate: 'Нажмите, чтобы вращать', load: 'Зажигаем звезду…',
       gpuWeak: 'Кадры из моего симулятора звёзд для игры «Горизонт М31». Живая версия считает объёмную корону на видеокарте (WebGL2) и запускается здесь только на мощном GPU.',
       gpuLive: 'Симулятор звёзд для игры «Горизонт М31»: объёмный рендер короны на видеокарте (WebGL2).',
-      runAnyway: 'Запустить всё равно', open: 'Открыть стенд →',
-      cme: '▶ Выброс', cmeTag: 'Live · выброс на Солнце', cmeCap: 'Корональный выброс в реальном времени: магнитная петля над активной областью Солнца теряет равновесие и уносит плазму. У красных карликов вроде Барнарда выброс обычно заперт полем — поэтому показываем на Солнце.'
+      runAnyway: 'Запустить всё равно', open: 'Открыть стенд →'
     },
     en: {
       stars: [
@@ -42,8 +41,7 @@
       rotate: 'Click to rotate', load: 'Igniting the star…',
       gpuWeak: 'Frames from my star simulator for the game “Horizon M31”. The live version renders a volumetric corona on the GPU (WebGL2) and runs here only on a powerful graphics card.',
       gpuLive: 'Star simulator for the game “Horizon M31”: volumetric corona rendered on the GPU (WebGL2).',
-      runAnyway: 'Run it anyway', open: 'Open the bench →',
-      cme: '▶ Ejection', cmeTag: 'Live · ejection on the Sun', cmeCap: 'A coronal mass ejection in real time: a magnetic loop above a solar active region loses equilibrium and carries plasma away. On red dwarfs like Barnard’s Star the field usually traps it — so it is shown on the Sun.'
+      runAnyway: 'Run it anyway', open: 'Open the bench →'
     }
   };
   const L = () => T[document.documentElement.lang === 'en' ? 'en' : 'ru'];
@@ -62,7 +60,7 @@
     } catch (e) { return false; }
   }
   const strong = !new URLSearchParams(location.search).has('slides') && strongGpu();   // ?slides — force the frames mode (to preview what weaker devices see)
-  let live = false, forceHigh = false, idx = 0, timer = 0, cmeOn = false;
+  let live = false, forceHigh = false, idx = 0, timer = 0;
 
   // ---- slideshow
   function show(i) {
@@ -82,8 +80,7 @@
     run.textContent = l.runAnyway;
     run.hidden = live;
     gpu.textContent = live ? l.gpuLive : l.gpuWeak;
-    cmeBtn.textContent = l.cme;
-    if (live) { tag.textContent = cmeOn ? l.cmeTag : l.liveTag; cap.textContent = cmeOn ? l.cmeCap : l.liveCap; hint.textContent = l.rotate; }
+    if (live) { tag.textContent = l.liveTag; cap.textContent = l.liveCap; hint.textContent = l.rotate; }
     else show(idx);
   }
 
@@ -119,36 +116,6 @@
     } catch (e) { box.classList.add('ready'); }
   }
   frame.addEventListener('load', () => { if (strip()) setup(20); else box.classList.add('ready'); });
-
-  // ---- live ejection: switch to the Sun, start the stand's flare+CME event, frame the limb close up, then return to Barnard
-  const wait = ms => new Promise(r => setTimeout(r, ms));
-  async function runCme() {
-    if (cmeOn) return;
-    let d; try { d = frame.contentDocument; } catch (e) { return; }
-    const cv = d && d.querySelector('#view canvas'), ev = d && d.getElementById('evStart'), W = d && d.defaultView;
-    if (!cv || !ev) return;
-    cmeOn = true; cmeBtn.disabled = true; texts();
-    const wheel = z => cv.dispatchEvent(new W.WheelEvent('wheel', { deltaY: z, bubbles: true, cancelable: true }));
-    const pan = (dx, dy) => {   // shift-drag pans the camera target; amounts tuned on a 640×800 view, scaled to this frame
-      const r = cv.getBoundingClientRect(), k = r.height / 800, x = r.left + r.width / 2, y = r.top + r.height / 2;
-      const o = { bubbles: true, cancelable: true, pointerId: 9, shiftKey: true, button: 0, clientX: x, clientY: y };
-      const cap = cv.setPointerCapture; cv.setPointerCapture = () => {};   // synthetic pointer: nothing to capture
-      cv.dispatchEvent(new W.PointerEvent('pointerdown', o));
-      cv.setPointerCapture = cap;
-      for (let i = 1; i <= 10; i++) cv.dispatchEvent(new W.PointerEvent('pointermove', Object.assign({}, o, { clientX: x + dx * k * i / 10, clientY: y + dy * k * i / 10 })));
-      cv.dispatchEvent(new W.PointerEvent('pointerup', Object.assign({}, o, { clientX: x + dx * k, clientY: y + dy * k })));
-    };
-    const preset = i => { const b = d.querySelector('#presets button[data-i="' + i + '"]'); if (b) b.click(); };
-    if (/остановить/.test(ev.textContent)) ev.click();
-    preset(0); await wait(4000);
-    ev.click(); await wait(1600);
-    wheel(-1000); await wait(300); pan(-210, 300);
-    await wait(16000);
-    if (/остановить/.test(ev.textContent)) ev.click();
-    preset(box.dataset.preset || '1'); await wait(1500); wheel(+box.dataset.zoom || -860);
-    cmeOn = false; cmeBtn.disabled = false; texts();
-  }
-  cmeBtn.addEventListener('click', e => { e.stopPropagation(); runCme(); });
 
   function startLive(high) {
     if (live) return;

@@ -96,20 +96,35 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
 .chip{font-family:var(--mono);font-size:11.5px;padding:4px 10px;border:1px solid var(--line2);border-radius:99px;color:#b6bac6}
 
 /* WORK */
-.work{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
-.w{grid-column:span 2;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;min-height:300px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.work{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:760px){.work{grid-template-columns:1fr}}
+.w{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px 28px;display:flex;flex-direction:column;min-height:440px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;isolation:isolate}
 .w:hover{border-color:var(--line2);transform:translateY(-4px)}
-.w.big{grid-column:span 3;min-height:360px}
-@media(max-width:960px){.w,.w.big{grid-column:span 3}}
-@media(max-width:620px){.w,.w.big{grid-column:span 6;min-height:0}}
-.w-art{position:absolute;inset:0;opacity:.55;pointer-events:none}
-.w>*:not(.w-art){position:relative}
-.w-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--dim);margin-bottom:auto;padding-bottom:60px}
+.w-media{position:absolute;inset:0;z-index:-1;background:#07080b}
+.w-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease,transform 6s ease}
+.w:hover .w-media img{transform:scale(1.04)}
+.w-media.rot img{opacity:0}
+.w-media.rot img.on{opacity:1}
+.w-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,12,16,.55) 0%,rgba(11,12,16,0) 22%,rgba(11,12,16,.15) 42%,rgba(20,22,29,.92) 68%,var(--card) 84%)}
+.w-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:#c9ccd4;margin-bottom:auto;padding-bottom:120px;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.w-top .w-r{display:flex;gap:8px;align-items:center}
+.w-shot{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--hot2);background:rgba(4,7,11,.6);backdrop-filter:blur(6px);padding:4px 9px;border-radius:99px;text-shadow:none}
 .w-client{font-size:12px;font-family:var(--mono);color:var(--hot2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
-.w h3{font-family:var(--head);font-size:22px;font-weight:600;letter-spacing:-.015em;margin-bottom:10px}
-.w p{font-size:14.5px;color:var(--muted);margin-bottom:18px}
+.w h3{font-family:var(--head);font-size:24px;font-weight:600;letter-spacing:-.015em;margin-bottom:10px}
+.w p{font-size:14.5px;color:#a9adb9;margin-bottom:18px;max-width:560px}
+.w-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.w-link{font-family:var(--mono);font-size:11.5px;padding:5px 12px;border-radius:99px;border:1px solid var(--hot);color:var(--hot2);display:inline-flex;align-items:center;gap:6px;transition:background .2s,color .2s}
+.w-link:hover{background:var(--hot);color:#140800}
+.w-link.tg{border-color:#2aabee;color:#7fd0ff}
+.w-link.tg:hover{background:#2aabee;color:#04121c}
+@media(max-width:620px){
+  .w{min-height:0;padding:20px 20px 22px}
+  .w-media{bottom:auto;height:min(64vw,300px)}
+  .w-media::after{background:linear-gradient(to bottom,rgba(11,12,16,.5) 0%,rgba(11,12,16,0) 30%,rgba(20,22,29,.6) 75%,var(--card) 100%)}
+  .w-top{padding-bottom:calc(min(64vw,300px) - 70px)}
+  .w:has([data-rot]) .w-r>span:not(.w-shot){display:none}
+}
 .tag-rd{color:var(--cool)}
-
 /* STACK */
 .stack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:900px){.stack{grid-template-columns:1fr 1fr}}
@@ -165,10 +180,6 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
 .sd-gpu a,.sd-run{color:var(--hot2);white-space:nowrap}
 .sd-gpu a:hover,.sd-run:hover{text-decoration:underline}
 .sd-run{background:none;border:0;padding:0;font:inherit;cursor:pointer}
-.sd-cme{position:absolute;right:12px;top:12px;z-index:3;display:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:#140800;background:var(--hot);border:0;border-radius:99px;padding:6px 12px;cursor:pointer}
-.sd-cme:hover{background:var(--hot2)}
-.sd-cme:disabled{opacity:.55;cursor:default}
-.star-demo.live.ready .sd-cme{display:block}
 .sd-dots{display:flex;gap:6px}
 .sd-dots i{width:6px;height:6px;border-radius:50%;background:var(--line2)}
 .sd-dots i.on{background:var(--hot2)}
@@ -290,56 +301,72 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
   <div class="wrap">
     <div class="sec-head rv">
       <div><div class="sec-num">02 / WORK</div><h2 data-i="wk.h">Избранные проекты</h2></div>
-      <p class="sec-sub" data-i="wk.sub">От государственных и академических заказов до инди-игр и собственных R&D-систем.</p>
+      <p class="sec-sub" data-i="wk.sub">От государственных и академических заказов до своих игр и R&D-систем.</p>
     </div>
     <div class="work">
-      <article class="w big rv" data-art="cosmos">
-        <canvas class="w-art"></canvas>
-        <div class="w-top"><span>001</span><span>AI VIDEO · FILM</span></div>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/cosmos.webp" alt="Внутренний космос" loading="lazy"></div>
+        <div class="w-top"><span>001</span><span class="w-r"><span>AI VIDEO · FILM</span></span></div>
         <div class="w-client" data-i="w1.c">Космическая отрасль</div>
         <h3 data-i="w1.h">«Внутренний космос»</h3>
         <p data-i="w1.p">Философский фильм: путь от наблюдения Вселенной к безграничности человеческого сознания. Генеративный AI в официальном проекте.</p>
-        <div class="chips"><span class="chip">ChatGPT</span><span class="chip">Kling</span></div>
+        <div class="w-foot"><span class="chip">ChatGPT</span><span class="chip">Kling</span></div>
       </article>
-      <article class="w big rv" data-art="drone">
-        <canvas class="w-art"></canvas>
-        <div class="w-top"><span>002</span><span>PROMO · UE</span></div>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/elavia.webp" alt="Промо пассажирского дрона" loading="lazy"></div>
+        <div class="w-top"><span>002</span><span class="w-r"><span>PROMO · UE</span></span></div>
         <div class="w-client" data-i="w2.c">Производитель дронов</div>
         <h3 data-i="w2.h">Промо пассажирского дрона</h3>
         <p data-i="w2.p">Фотореалистичный ролик о будущем городской мобильности: дизайн дрона и полёты над городом.</p>
-        <div class="chips"><span class="chip">Unreal Engine</span><span class="chip">Houdini</span><span class="chip">Blender</span><span class="chip">DaVinci</span></div>
+        <div class="w-foot"><span class="chip">Unreal Engine</span><span class="chip">Houdini</span><span class="chip">Blender</span><span class="chip">DaVinci</span><a class="w-link" href="https://www.youtube.com/watch?v=htJQTrWHgsk" target="_blank" rel="noopener"><span data-i="wl.yt">▶ Смотреть на YouTube</span></a></div>
       </article>
-      <article class="w big rv" data-art="grid">
-        <canvas class="w-art"></canvas>
-        <div class="w-top"><span>003</span><span>SCIENCE VIZ</span></div>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/math.webp" alt="Модели для вычислительной математики" loading="lazy"></div>
+        <div class="w-top"><span>003</span><span class="w-r"><span>SCIENCE VIZ</span></span></div>
         <div class="w-client" data-i="w4.c">Научный институт</div>
         <h3 data-i="w4.h">Модели для вычислительной математики</h3>
         <p data-i="w4.p">Долгосрочное сотрудничество: графические модели для научных исследований.</p>
-        <div class="chips"><span class="chip">Research</span></div>
+        <div class="w-foot"><span class="chip">Research</span><span class="chip">Houdini</span></div>
       </article>
-      <article class="w big rv" data-art="pins">
-        <canvas class="w-art"></canvas>
-        <div class="w-top"><span>004</span><span>GAME · iOS</span></div>
+      <article class="w rv">
+        <div class="w-media rot" data-rot><img src="assets/cards/rram/stand-house.webp" alt="RRaM — 3D-стенд: дом у озера" data-ru="3D-стенд: дом у озера" data-en="3D stand: lake house" loading="lazy" class="on"><img src="assets/cards/rram/concept.webp" alt="RRaM — Концепт дома" data-ru="Концепт дома" data-en="House concept" loading="lazy"><img src="assets/cards/rram/blueprint.webp" alt="RRaM — Чертёж дома" data-ru="Чертёж дома" data-en="House blueprint" loading="lazy"><img src="assets/cards/rram/model.webp" alt="RRaM — 3D-модель" data-ru="3D-модель" data-en="3D model" loading="lazy"><img src="assets/cards/rram/textures.webp" alt="RRaM — Текстуры" data-ru="Текстуры" data-en="Textures" loading="lazy"><img src="assets/cards/rram/stand-bridge.webp" alt="RRaM — 3D-стенд: мост" data-ru="3D-стенд: мост" data-en="3D stand: bridge" loading="lazy"><img src="assets/cards/rram/game.webp" alt="RRaM — Игровой экран" data-ru="Игровой экран" data-en="Game screen" loading="lazy"><img src="assets/cards/rram/map.webp" alt="RRaM — Чертёж карты" data-ru="Чертёж карты" data-en="Map blueprint" loading="lazy"></div>
+        <div class="w-top"><span>004</span><span class="w-r"><span>BOARD GAME · ONLINE</span></span></div>
+        <div class="w-client" data-i="w9.c">Собственная разработка</div>
+        <h3>RRaM</h3>
+        <p data-i="w9.p">Цифровая версия настольной игры: гексагональное поле, карты, кубики, бои. Клиент, сервер, 3D-стенд поля и графика — от концептов и чертежей до релиза на Яндекс Играх.</p>
+        <div class="w-foot"><span class="chip">JS</span><span class="chip">Node.js</span><span class="chip">WebSocket</span><span class="chip">Three.js</span></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/yui.webp" alt="Карточная игра YUI" loading="lazy"></div>
+        <div class="w-top"><span>005</span><span class="w-r"><span>CARD GAME · TELEGRAM</span></span></div>
+        <div class="w-client" data-i="w10.c">Своя игра</div>
+        <h3>YUI</h3>
+        <p data-i="w10.p">Карточная игра на 20 картах: онлайн с друзьями по коду комнаты, боты, обучение. Проигравший раздачу получает букву — кто собрал Y-U-I, проиграл матч.</p>
+        <div class="w-foot"><span class="chip">TypeScript</span><span class="chip">WebSocket</span><span class="chip">Telegram Mini App</span><a class="w-link tg" href="https://t.me/yui_cards_bot" target="_blank" rel="noopener"><span data-i="wl.tg">✈ Играть в Telegram</span></a></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/gorodki.webp" alt="Gorodki 3D" loading="lazy"></div>
+        <div class="w-top"><span>006</span><span class="w-r"><span>GAME · iOS</span></span></div>
         <div class="w-client" data-i="w6.c">Инди-игра</div>
         <h3>Gorodki 3D</h3>
         <p data-i="w6.p">Полный цикл: геймплей, 3D-ассеты, оптимизация под мобильные устройства.</p>
-        <div class="chips"><span class="chip">Unity</span><span class="chip">iOS</span></div>
+        <div class="w-foot"><span class="chip">Unity</span><span class="chip">iOS</span></div>
       </article>
-      <article class="w big rv" data-art="path">
-        <canvas class="w-art"></canvas>
-        <div class="w-top"><span>005</span><span class="tag-rd">R&amp;D</span></div>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/drone.webp" alt="Лётная школа для дронов" loading="lazy"></div>
+        <div class="w-top"><span>007</span><span class="w-r"><span><span class="tag-rd">R&amp;D</span></span></span></div>
         <div class="w-client" data-i="w7.c">Собственная разработка</div>
         <h3 data-i="w7.h">Лётная школа для дронов</h3>
         <p data-i="w7.p">Симулятор с 6-DOF динамикой: автопилот плюс обучение с подкреплением для наведения и групповых сценариев.</p>
-        <div class="chips"><span class="chip">Python</span><span class="chip">RL</span><span class="chip">C++</span><span class="chip">JS</span></div>
+        <div class="w-foot"><span class="chip">Python</span><span class="chip">RL</span><span class="chip">C++</span><span class="chip">JS</span></div>
       </article>
-      <article class="w big rv" data-art="reel">
-        <canvas class="w-art"></canvas>
-        <div class="w-top"><span>006</span><span>REEL</span></div>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/demo.webp" alt="Шоурил" loading="lazy"></div>
+        <div class="w-top"><span>008</span><span class="w-r"><span>REEL</span></span></div>
         <div class="w-client">Showreel</div>
         <h3>DEMO 2025</h3>
         <p data-i="w8.p">Фрагменты разных проектов в одном ролике — диапазон навыков и технологий.</p>
-        <a class="chip" style="border-color:var(--hot);color:var(--hot2);width:max-content" href="https://www.youtube.com/channel/UChwymOtxgOrdCRTa1yj_3QA" target="_blank" rel="noopener" data-i="w8.l">Смотреть на YouTube →</a>
+        <div class="w-foot"><span class="chip">Houdini</span><span class="chip">Unreal</span><span class="chip">AI</span><a class="w-link" href="https://www.youtube.com/channel/UChwymOtxgOrdCRTa1yj_3QA" target="_blank" rel="noopener"><span data-i="wl.ch">▶ Канал на YouTube</span></a></div>
       </article>
     </div>
   </div>
@@ -413,7 +440,6 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
           <img src="assets/stars/sun.webp" alt="Солнце — кадр симулятора" loading="lazy">
           <img src="assets/stars/eps-indi.webp" alt="ε Индейца — кадр симулятора" loading="lazy">
         </div>
-        <button type="button" class="sd-cme" id="sdCme"></button>
         <iframe title="Симулятор звезды М31" tabindex="-1"></iframe>
         <div class="sd-load" id="sdLoad">Зажигаем звезду…</div>
         <span class="sd-tag" id="sdTag">Звезда Барнарда · M4V</span>
@@ -464,14 +490,17 @@ const EN = {
  'd4.h':'Game dev & real-time','d4.p':'Games, VR and interactive: materials, shaders, real-time VFX, mobile optimization.',
  'd5.h':'Engineering & 3D printing','d5.p':'Parametric CAD, manufacturing prep, tolerances and fits. From a digital model to a working part.',
  'd6.h':'Code, ML & simulation','d6.p':'Python tools and pipeline automation, computer vision, reinforcement learning for drone control.',
- 'wk.h':'Selected work','wk.sub':'From government and academic commissions to indie games and in-house R&D systems.',
+ 'wk.h':'Selected work','wk.sub':'From government and academic commissions to my own games and R&D systems.',
  'w1.c':'Space industry','w1.h':'“Inner Cosmos”','w1.p':'A philosophical film: from observing the Universe to the boundlessness of human consciousness. Generative AI in an official project.',
  'w2.c':'Drone manufacturer',
  'w2.h':'Passenger drone promo','w2.p':'A photoreal film about the future of urban mobility: drone design and flights over the city.',
  'w4.c':'Research institute','w4.h':'Models for computational math','w4.p':'Long-term collaboration: graphic models for scientific research.',
+ 'w9.c':'In-house project','w9.p':'A digital version of a board game: hex board, cards, dice, battles. Client, server, a 3D board stand and the art — from concepts and blueprints to a release on Yandex Games.',
+ 'w10.c':'My own game','w10.p':'A card game with 20 cards: play friends online by room code, bots, a tutorial. The loser of a deal gets a letter — collect Y-U-I and you lose the match.',
+ 'wl.yt':'▶ Watch on YouTube','wl.tg':'✈ Play in Telegram','wl.ch':'▶ YouTube channel',
  'w6.c':'Indie game','w6.p':'Full cycle: gameplay, 3D assets, mobile optimization.',
  'w7.c':'In-house R&D','w7.h':'Flight school for drones','w7.p':'A 6-DOF dynamics simulator: autopilot plus reinforcement learning for guidance and swarm scenarios.',
- 'w8.p':'Clips from many projects in one reel — the range of skills and tools.','w8.l':'Watch on YouTube →',
+ 'w8.p':'Clips from many projects in one reel — the range of skills and tools.',
  'stk.h':'Tools','stk.sub':'I pick the tool for the task, not the task for the tool.',
  't.hou':'simulation, procedural','t.bl':'modeling, sculpt, render','t.ue':'games, VR, shaders','t.nk':'compositing','t.dv':'edit, color',
  't.vid':'video generation','t.ag':'agents, scripts','t.cad':'parametric CAD','t.pr':'3D printing','t.mill':'Milling, tolerances',
@@ -545,32 +574,18 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduced){for(let i=0;i<120;i++)frame()} else frame();
 })();
 
-/* ---------- project card art (static, generated once) ---------- */
-document.querySelectorAll('.w').forEach((card,i)=>{
-  const c=card.querySelector('.w-art'), x=c.getContext('2d'), kind=card.dataset.art;
-  function draw(){
-    const W=card.clientWidth,H=card.clientHeight,d=Math.min(devicePixelRatio||1,2);
-    c.width=W*d;c.height=H*d;c.style.width=W+'px';c.style.height=H+'px';x.setTransform(d,0,0,d,0,0);
-    x.clearRect(0,0,W,H);
-    let seed=i*9301+49297; const R=()=>(seed=(seed*9301+49297)%233280)/233280;
-    const cx=W*.78,cy=H*.28;
-    x.lineWidth=1;
-    if(kind==='cosmos'||kind==='reel'){for(let k=0;k<260;k++){x.fillStyle=`rgba(255,255,255,${R()*.6})`;x.fillRect(R()*W,R()*H*.7,R()*1.6,R()*1.6)}
-      for(let r=20;r<160;r+=14){x.strokeStyle=`rgba(255,106,43,${.35-r/600})`;x.beginPath();x.ellipse(cx,cy,r*1.6,r*.5,-.3,0,7);x.stroke()}}
-    if(kind==='sun'){const g=x.createRadialGradient(cx,cy,0,cx,cy,150);g.addColorStop(0,'rgba(255,176,59,.9)');g.addColorStop(.45,'rgba(255,106,43,.45)');g.addColorStop(1,'rgba(255,106,43,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
-      for(let k=0;k<70;k++){const a=R()*7,r=40+R()*30;x.strokeStyle='rgba(20,8,0,.35)';x.beginPath();x.arc(cx+Math.cos(a)*r*.6,cy+Math.sin(a)*r*.6,4+R()*8,0,7);x.stroke()}}
-    if(kind==='drone'){x.strokeStyle='rgba(83,214,198,.45)';for(let k=0;k<5;k++){x.beginPath();x.moveTo(W*.35,H*.55-k*16);x.bezierCurveTo(W*.55,H*.1-k*10,W*.8,H*.5-k*8,W,H*.2-k*12);x.stroke()}
-      x.fillStyle='rgba(255,255,255,.07)';for(let k=0;k<14;k++){const bw=20+R()*40,bh=40+R()*120,bx=W*.35+R()*W*.65;x.fillRect(bx,H*.62-bh*.4,bw,bh)}}
-    if(kind==='grid'){x.strokeStyle='rgba(83,214,198,.28)';for(let gx=0;gx<16;gx++){x.beginPath();for(let gy=0;gy<=30;gy++){const px=W*.4+gx*14+Math.sin(gy*.4+gx*.3)*8,py=gy*8;gy?x.lineTo(px,py):x.moveTo(px,py)}x.stroke()}}
-    if(kind==='burst'){for(let k=0;k<420;k++){const a=R()*7,r=Math.pow(R(),.6)*130;x.fillStyle=k%5?'rgba(255,176,59,.6)':'rgba(83,214,198,.7)';x.fillRect(cx+Math.cos(a)*r,cy+Math.sin(a)*r*.8,1.4,1.4)}}
-    if(kind==='pins'){x.strokeStyle='rgba(255,176,59,.45)';x.lineWidth=6;x.lineCap='round';for(let k=0;k<5;k++){x.beginPath();x.moveTo(W*.55+k*22,H*.42);x.lineTo(W*.55+k*22,H*.1);x.stroke()}
-      x.save();x.translate(W*.4,H*.5);x.rotate(-.5);x.strokeStyle='rgba(255,106,43,.55)';x.lineWidth=7;x.beginPath();x.moveTo(-50,0);x.lineTo(50,0);x.stroke();x.restore()}
-    if(kind==='path'){x.strokeStyle='rgba(83,214,198,.5)';x.setLineDash([4,6]);x.beginPath();x.moveTo(W*.3,H*.5);for(let k=0;k<=20;k++){x.lineTo(W*.3+k*W*.035,H*.45-Math.sin(k*.45)*H*.18-k*2)}x.stroke();x.setLineDash([]);
-      for(let k=0;k<6;k++){const px=W*.5+R()*W*.45,py=H*.1+R()*H*.3;x.strokeStyle='rgba(255,106,43,.6)';x.strokeRect(px-5,py-5,10,10)}}
-  }
-  draw(); addEventListener('resize',draw);
+/* ---------- rotating card images (RRaM) ---------- */
+document.querySelectorAll('[data-rot]').forEach(box=>{
+  const ims=[...box.querySelectorAll('img')], card=box.closest('.w'), right=card.querySelector('.w-r');
+  const shot=document.createElement('span'); shot.className='w-shot'; right.prepend(shot);
+  let i=0, tm=0;
+  const label=()=>{shot.textContent=ims[i].dataset[document.documentElement.lang==='en'?'en':'ru']};
+  const show=k=>{ims[i].classList.remove('on');i=k;ims[i].classList.add('on');label()};
+  label();
+  new IntersectionObserver(es=>es.forEach(e=>{clearInterval(tm);if(e.isIntersecting&&!matchMedia('(prefers-reduced-motion: reduce)').matches)tm=setInterval(()=>show((i+1)%ims.length),3200)})).observe(box);
+  new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 });
 </script>
-<script src="assets/star-demo.js?v=9" defer></script>
+<script src="assets/star-demo.js?v=10" defer></script>
 </body>
 </html>
