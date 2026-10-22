@@ -10,7 +10,7 @@
   const frame = box.querySelector('iframe');
   const slides = [...box.querySelectorAll('.sd-slides img')];
   const $ = id => document.getElementById(id);
-  const tag = $('sdTag'), hint = $('sdHint'), cap = $('sdCap'), gpu = $('sdGpu'), run = $('sdRun'), open = $('sdOpen'), load = $('sdLoad');
+  const liveBtn = $('sdLive'), tag = $('sdTag'), hint = $('sdHint'), cap = $('sdCap'), gpu = $('sdGpu'), run = $('sdRun'), open = $('sdOpen'), load = $('sdLoad');
 
   const T = {
     ru: {
@@ -26,7 +26,9 @@
       rotate: 'Нажмите, чтобы вращать', load: 'Зажигаем звезду…',
       gpuWeak: 'Кадры из моего симулятора звёзд для игры «Горизонт М31». Живая версия считает объёмную корону на видеокарте (WebGL2) и запускается здесь только на мощном GPU.',
       gpuLive: 'Симулятор звёзд для игры «Горизонт М31»: объёмный рендер короны на видеокарте (WebGL2).',
-      runAnyway: 'Запустить всё равно', open: 'Открыть стенд →'
+      runAnyway: 'Запустить всё равно', open: 'Открыть стенд →',
+      gpuStrong: 'Кадры из моего симулятора звёзд для игры «Горизонт М31». Ваша видеокарта потянет живую версию — объёмная корона считается на GPU (WebGL2).',
+      live: '▶ Живая симуляция'
     },
     en: {
       stars: [
@@ -41,7 +43,9 @@
       rotate: 'Click to rotate', load: 'Igniting the star…',
       gpuWeak: 'Frames from my star simulator for the game “Horizon M31”. The live version renders a volumetric corona on the GPU (WebGL2) and runs here only on a powerful graphics card.',
       gpuLive: 'Star simulator for the game “Horizon M31”: volumetric corona rendered on the GPU (WebGL2).',
-      runAnyway: 'Run it anyway', open: 'Open the bench →'
+      runAnyway: 'Run it anyway', open: 'Open the bench →',
+      gpuStrong: 'Frames from my star simulator for the game “Horizon M31”. Your graphics card can run the live version — the volumetric corona is rendered on the GPU (WebGL2).',
+      live: '▶ Live simulation'
     }
   };
   const L = () => T[document.documentElement.lang === 'en' ? 'en' : 'ru'];
@@ -78,8 +82,9 @@
     load.textContent = l.load;
     open.textContent = l.open;
     run.textContent = l.runAnyway;
-    run.hidden = live;
-    gpu.textContent = live ? l.gpuLive : l.gpuWeak;
+    run.hidden = live || strong;
+    liveBtn.hidden = live; liveBtn.textContent = l.live;
+    gpu.textContent = live ? l.gpuLive : (strong ? l.gpuStrong : l.gpuWeak);
     if (live) { tag.textContent = l.liveTag; cap.textContent = l.liveCap; hint.textContent = l.rotate; }
     else show(idx);
   }
@@ -134,7 +139,6 @@
   const io = new IntersectionObserver(es => es.forEach(e => {
     if (e.isIntersecting) {
       if (live) frame.style.display = '';
-      else if (strong) startLive(true);
       else play();
     } else {
       if (live) { frame.style.display = 'none'; box.classList.remove('active'); restore(); }
@@ -144,6 +148,7 @@
   io.observe(box);
 
   run.addEventListener('click', () => startLive(false));
+  liveBtn.addEventListener('click', e => { e.stopPropagation(); startLive(strong); });
   box.addEventListener('click', () => { if (live && box.classList.contains('ready')) box.classList.add('active'); });
   box.addEventListener('pointerleave', () => box.classList.remove('active'));
 

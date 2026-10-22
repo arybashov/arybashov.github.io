@@ -125,6 +125,12 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
   .w:has([data-rot]) .w-r>span:not(.w-shot){display:none}
 }
 .tag-rd{color:var(--cool)}
+.vmodal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(5,6,9,.86);backdrop-filter:blur(8px);padding:24px}
+.vmodal.open{display:flex}
+.vmodal video{width:min(1100px,100%);max-height:84vh;border-radius:14px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.vmodal button{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:rgba(20,22,29,.8);color:var(--text);font-size:20px;cursor:pointer}
+.vmodal button:hover{border-color:var(--hot)}
+
 /* STACK */
 .stack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 @media(max-width:900px){.stack{grid-template-columns:1fr 1fr}}
@@ -180,6 +186,9 @@ h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line
 .sd-gpu a,.sd-run{color:var(--hot2);white-space:nowrap}
 .sd-gpu a:hover,.sd-run:hover{text-decoration:underline}
 .sd-run{background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.sd-live{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#140800;background:var(--hot);border:0;border-radius:99px;padding:9px 16px;cursor:pointer;box-shadow:0 6px 24px rgba(255,106,43,.35);transition:background .2s,transform .2s}
+.sd-live:hover{background:var(--hot2);transform:translateX(-50%) translateY(-1px)}
+.sd-live[hidden]{display:none}
 .sd-dots{display:flex;gap:6px}
 .sd-dots i{width:6px;height:6px;border-radius:50%;background:var(--line2)}
 .sd-dots i.on{background:var(--hot2)}
@@ -310,7 +319,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
         <div class="w-client" data-i="w1.c">Космическая отрасль</div>
         <h3 data-i="w1.h">«Внутренний космос»</h3>
         <p data-i="w1.p">Философский фильм: путь от наблюдения Вселенной к безграничности человеческого сознания. Генеративный AI в официальном проекте.</p>
-        <div class="w-foot"><span class="chip">ChatGPT</span><span class="chip">Kling</span></div>
+        <div class="w-foot"><span class="chip">ChatGPT</span><span class="chip">Kling</span><a class="w-link" href="assets/video/inner-cosmos.mp4" data-video="assets/video/inner-cosmos.mp4" data-poster="assets/cards/cosmos.webp"><span data-i="wl.film">▶ Смотреть фильм</span></a></div>
       </article>
       <article class="w rv">
         <div class="w-media"><img src="assets/cards/elavia.webp" alt="Промо пассажирского дрона" loading="lazy"></div>
@@ -445,6 +454,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
         <div class="sd-load" id="sdLoad">Зажигаем звезду…</div>
         <span class="sd-tag" id="sdTag">Звезда Барнарда · M4V</span>
         <span class="sd-hint" id="sdHint"></span>
+        <button type="button" class="sd-live" id="sdLive" hidden></button>
       </div>
       <p class="sd-cap"><span id="sdCap"></span></p>
       <p class="sd-gpu"><span id="sdGpu"></span> <button type="button" class="sd-run" id="sdRun"></button> <a href="/lab/" target="_blank" rel="noopener" id="sdOpen"></a></p>
@@ -498,7 +508,7 @@ const EN = {
  'w4.c':'Research institute','w4.h':'Models for computational math','w4.p':'Long-term collaboration: graphic models for scientific research.',
  'w9.c':'In-house project','w9.p':'A digital version of a board game: hex board, cards, dice, battles. Client, server, a 3D board stand and the art — from concepts and blueprints to a release on Yandex Games.',
  'w10.c':'My own game','w10.p':'A card game with 20 cards: play friends online by room code, bots, a tutorial. The loser of a deal gets a letter — collect Y-U-I and you lose the match.',
- 'wl.yt':'▶ Watch on YouTube','wl.tg':'✈ Play in Telegram','wl.ch':'▶ YouTube channel','wl.sim':'▶ Launch the simulator',
+ 'wl.yt':'▶ Watch on YouTube','wl.tg':'✈ Play in Telegram','wl.ch':'▶ YouTube channel','wl.sim':'▶ Launch the simulator','wl.film':'▶ Watch the film',
  'w6.c':'Indie game','w6.p':'Full cycle: gameplay, 3D assets, mobile optimization.',
  'w7.c':'In-house R&D','w7.h':'Flight school for drones','w7.p':'A 6-DOF dynamics simulator: autopilot plus reinforcement learning for guidance and swarm scenarios.',
  'w8.p':'Clips from many projects in one reel — the range of skills and tools.',
@@ -575,6 +585,11 @@ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(reduced){for(let i=0;i<120;i++)frame()} else frame();
 })();
 
+/* ---------- video modal ---------- */
+(()=>{const m=document.createElement('div');m.className='vmodal';m.innerHTML='<button type="button" aria-label="Закрыть">×</button><video controls playsinline preload="none"></video>';document.body.appendChild(m);
+const v=m.querySelector('video');const close=()=>{v.pause();m.classList.remove('open');v.removeAttribute('src');v.load()};
+document.querySelectorAll('[data-video]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();v.poster=a.dataset.poster||'';v.src=a.dataset.video;m.classList.add('open');v.play().catch(()=>{})}));
+m.addEventListener('click',e=>{if(e.target===m||e.target.tagName==='BUTTON')close()});addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))close()});})();
 /* ---------- rotating card images (RRaM) ---------- */
 document.querySelectorAll('[data-rot]').forEach(box=>{
   const ims=[...box.querySelectorAll('img')], card=box.closest('.w'), right=card.querySelector('.w-r');
@@ -587,6 +602,6 @@ document.querySelectorAll('[data-rot]').forEach(box=>{
   new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
 });
 </script>
-<script src="assets/star-demo.js?v=10" defer></script>
+<script src="assets/star-demo.js?v=11" defer></script>
 </body>
 </html>
