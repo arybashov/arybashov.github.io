@@ -132,7 +132,9 @@
     const pan = (dx, dy) => {   // shift-drag pans the camera target; amounts tuned on a 640×800 view, scaled to this frame
       const r = cv.getBoundingClientRect(), k = r.height / 800, x = r.left + r.width / 2, y = r.top + r.height / 2;
       const o = { bubbles: true, cancelable: true, pointerId: 9, shiftKey: true, button: 0, clientX: x, clientY: y };
+      const cap = cv.setPointerCapture; cv.setPointerCapture = () => {};   // synthetic pointer: nothing to capture
       cv.dispatchEvent(new W.PointerEvent('pointerdown', o));
+      cv.setPointerCapture = cap;
       for (let i = 1; i <= 10; i++) cv.dispatchEvent(new W.PointerEvent('pointermove', Object.assign({}, o, { clientX: x + dx * k * i / 10, clientY: y + dy * k * i / 10 })));
       cv.dispatchEvent(new W.PointerEvent('pointerup', Object.assign({}, o, { clientX: x + dx * k, clientY: y + dy * k })));
     };

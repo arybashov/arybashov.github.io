@@ -73,9 +73,13 @@ function stripGlsl(code) {
 const here = dirname(fileURLToPath(import.meta.url));
 const SRC = resolve(process.argv[2] || join(here, '../../_M31/PROTOTYPE/.star-sim'));
 const OUT = resolve(here, '../lab');
-const JS = ['stars.js', 'star-model.js', 'surface-state.js', 'photosphere.js', 'cme-particles.js', 'corona.js', 'lab.js', 'hydro-worker.js', 'hydro1d.js'];
-
 if (!existsSync(join(SRC, 'index.html'))) { console.error('no simulator at', SRC); process.exit(1); }
+// what to ship: every local <script src> of the page, plus worker scripts they start (new Worker / importScripts), recursively
+const JS = [];
+const addJs = f => { f = f.replace(/^\.\//, ''); if (!JS.includes(f) && existsSync(join(SRC, f))) { JS.push(f);
+  const s = readFileSync(join(SRC, f), 'utf8');
+  for (const m of s.matchAll(/(?:new\s+Worker|importScripts)\s*\([^)]*?['"]([\w.\/-]+\.js)['"]/g)) addJs(m[1]); } };
+for (const m of readFileSync(join(SRC, 'index.html'), 'utf8').matchAll(/<script[^>]+src="([^"?:]+\.js)/g)) addJs(m[1]);
 rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
@@ -97,4 +101,4 @@ html = html.replace(/<a[^>]*href="refs\.html"[^>]*>[\s\S]*?<\/a>/g, '');
 html = await minifyHtml(html, { collapseWhitespace: true, conservativeCollapse: true, removeComments: true, minifyCSS: true, minifyJS: { format: { comments: false } } });
 writeFileSync(join(OUT, 'index.html'), html);
 writeFileSync(join(OUT, '.nojekyll'), '');
-console.log(`lab built: ${JS.length} scripts, ${(inBytes / 1024) | 0} KB -> ${(outBytes / 1024) | 0} KB, v=${v}`);
+console.log(`lab built: ${JS.length} scripts (${JS.join(', ')}), ${(inBytes / 1024) | 0} KB -> ${(outBytes / 1024) | 0} KB, v=${v}`);
