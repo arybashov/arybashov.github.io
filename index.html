@@ -404,7 +404,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
 <section id="about" style="padding-top:40px">
   <div class="wrap about">
     <div class="rv">
-      <div class="star-demo" id="starDemo" data-src="/star-sim/" data-preset="1" aria-label="Симуляция звёзд">
+      <div class="star-demo" id="starDemo" data-src="/lab/" data-preset="1" aria-label="Симуляция звёзд">
         <div class="sd-slides">
           <img src="assets/stars/barnard.webp" alt="Звезда Барнарда — кадр симулятора" class="on">
           <img src="assets/stars/proxima-arcs.webp" alt="Арки короны Проксимы Центавра — кадр симулятора" loading="lazy">
@@ -420,7 +420,7 @@ footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-
         <span class="sd-hint" id="sdHint"></span>
       </div>
       <p class="sd-cap"><span id="sdCap"></span></p>
-      <p class="sd-gpu"><span id="sdGpu"></span> <button type="button" class="sd-run" id="sdRun"></button> <a href="/star-sim/" target="_blank" rel="noopener" id="sdOpen"></a></p>
+      <p class="sd-gpu"><span id="sdGpu"></span> <button type="button" class="sd-run" id="sdRun"></button> <a href="/lab/" target="_blank" rel="noopener" id="sdOpen"></a></p>
     </div>
     <div class="about-txt rv">
       <div class="sec-num">05 / ABOUT</div>
@@ -571,6 +571,6 @@ document.querySelectorAll('.w').forEach((card,i)=>{
   draw(); addEventListener('resize',draw);
 });
 </script>
-<script src="assets/star-demo.js?v=7" defer></script>
+<script src="assets/star-demo.js?v=8" defer></script>
 </body>
 </html>
