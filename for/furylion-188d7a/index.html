@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<base href="/">
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Александр Рыбашов — для FuryLion</title>
+<meta name="description" content="Александр Рыбашов: 20+ лет в компьютерной графике. VFX и процедурные симуляции в Houdini, научная визуализация, AI-видео, геймдев на Unreal, инженерное 3D и Python/ML.">
+<meta property="og:title" content="Для FuryLion: Houdini · AI · Science Viz">
+<meta property="og:description" content="Делаю HTML5- и Telegram-игры и мобильный 3D — как раз ваш профиль заказов.">
+<meta property="og:image" content="https://arybashov.github.io/for/furylion-188d7a/og.jpg">
+<meta property="og:url" content="https://arybashov.github.io/for/furylion-188d7a/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://arybashov.github.io/for/furylion-188d7a/og.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b0c10'/%3E%3Ccircle cx='32' cy='32' r='14' fill='none' stroke='%23ff6a2b' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='4' fill='%2353d6c6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0c10; --bg2:#111319; --card:#14161d; --line:#23262f; --line2:#30343f;
+  --text:#ecedf1; --muted:#8c91a0; --dim:#5d6270;
+  --hot:#ff6a2b; --hot2:#ffb03b; --cool:#53d6c6;
+  --r:18px;
+  --head:'Unbounded',system-ui,sans-serif;
+  --body:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--body);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::selection{background:var(--hot);color:#000}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+@media(max-width:600px){.wrap{padding:0 16px}}
+
+/* NAV */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav.solid{background:rgba(11,12,16,.82);backdrop-filter:blur(14px);border-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--head);font-weight:800;font-size:15px;letter-spacing:.02em;display:flex;align-items:center;gap:10px}
+.logo i{width:22px;height:22px;border-radius:50%;border:3px solid var(--hot);position:relative}
+.logo i::after{content:'';position:absolute;inset:4px;border-radius:50%;background:var(--cool)}
+.nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+.nav-links a:hover{color:var(--text)}
+.lang{font-family:var(--mono);font-size:12px;border:1px solid var(--line2);border-radius:99px;padding:6px 12px;background:none;color:var(--text);cursor:pointer}
+.lang:hover{border-color:var(--hot)}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;background:var(--bg)}
+.hero-bg{position:absolute;inset:0;background:url(assets/solar.jpg?v=3) 30% 30%/cover no-repeat;transform:scale(1.04);animation:heroIn 2.4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes heroIn{from{opacity:0;transform:scale(1.12)}to{opacity:1;transform:scale(1.04)}}
+@media(max-width:700px){.hero-bg{bottom:34%;background-position:34% 40%}.hero::after{background:linear-gradient(to bottom,rgba(11,12,16,.5) 0%,transparent 14%,transparent 40%,var(--bg) 66%)}.hero .lead{font-size:16px}}
+#flow{position:absolute;inset:0;width:100%;height:100%;z-index:1;mix-blend-mode:screen}
+.hero::after{content:'';position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(11,12,16,.55) 0%,transparent 16%,transparent 48%,rgba(11,12,16,.8) 72%,var(--bg) 100%);pointer-events:none}
+.hero-in{position:relative;z-index:2;padding-top:90px;padding-bottom:70px;width:100%}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--cool);display:flex;align-items:center;gap:10px;margin-bottom:26px}
+.kicker::before{content:'';width:28px;height:1px;background:var(--cool)}
+h1{font-family:var(--head);font-weight:800;font-size:clamp(38px,6vw,92px);line-height:1;letter-spacing:-.035em;text-shadow:0 4px 40px rgba(0,0,0,.6)}
+h1 .grad{background:linear-gradient(90deg,var(--hot),var(--hot2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{max-width:620px;font-size:clamp(17px,1.9vw,20px);color:#d0d2d9;margin:22px 0 32px;text-shadow:0 1px 18px rgba(0,0,0,.9)}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 26px;border-radius:99px;font-weight:700;font-size:15px;transition:transform .2s,background .2s,border-color .2s}
+.btn-hot{background:var(--hot);color:#140800}
+.btn-hot:hover{background:var(--hot2);transform:translateY(-2px)}
+.btn-ghost{border:1px solid var(--line2);background:rgba(20,22,29,.6);backdrop-filter:blur(6px)}
+.btn-ghost:hover{border-color:var(--text)}
+.stats-strip{border-bottom:1px solid var(--line);padding:34px 0}
+.stats{display:grid;grid-template-columns:repeat(4,auto);justify-content:space-between;gap:44px}
+.stat b{display:block;font-family:var(--head);font-size:clamp(26px,3.4vw,40px);font-weight:600;letter-spacing:-.02em}
+.stat span{font-size:13px;color:var(--muted)}
+@media(max-width:700px){.stats{grid-template-columns:repeat(2,1fr);gap:26px}}
+.hint{position:absolute;z-index:2;bottom:26px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.2em}
+
+/* SECTIONS */
+section{padding:120px 0}
+@media(max-width:600px){section{padding:80px 0}}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:56px;flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;color:var(--hot);letter-spacing:.14em;margin-bottom:14px}
+h2{font-family:var(--head);font-weight:600;font-size:clamp(30px,4.6vw,56px);line-height:1.05;letter-spacing:-.03em;max-width:760px}
+.sec-sub{max-width:380px;color:var(--muted);font-size:15px}
+
+/* DISCIPLINES */
+.disc{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+@media(max-width:960px){.disc{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.disc{grid-template-columns:1fr}}
+.d{background:var(--bg);padding:34px 30px 32px;position:relative;transition:background .3s}
+.d:hover{background:var(--bg2)}
+.d::before{content:'';position:absolute;left:0;top:0;height:2px;width:0;background:linear-gradient(90deg,var(--hot),var(--cool));transition:width .5s}
+.d:hover::before{width:100%}
+.d-ico{width:44px;height:44px;margin-bottom:24px;color:var(--hot)}
+.d h3{font-family:var(--head);font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:12px}
+.d p{color:var(--muted);font-size:15px;margin-bottom:20px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-family:var(--mono);font-size:11.5px;padding:4px 10px;border:1px solid var(--line2);border-radius:99px;color:#b6bac6}
+
+/* WORK */
+.work{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+@media(max-width:760px){.work{grid-template-columns:1fr}}
+.w{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px 28px;display:flex;flex-direction:column;min-height:440px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;isolation:isolate}
+.w:hover{border-color:var(--line2);transform:translateY(-4px)}
+.w-media{position:absolute;inset:0;z-index:-1;background:#07080b}
+.w-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity 1.2s ease,transform 6s ease}
+.w:hover .w-media img{transform:scale(1.04)}
+.w-media.rot img{opacity:0}
+.w-media.rot img.on{opacity:1}
+.w-media::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(11,12,16,.55) 0%,rgba(11,12,16,0) 22%,rgba(11,12,16,.15) 42%,rgba(20,22,29,.92) 68%,var(--card) 84%)}
+.w-top{display:flex;justify-content:space-between;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;color:#c9ccd4;margin-bottom:auto;padding-bottom:120px;text-shadow:0 1px 8px rgba(0,0,0,.8)}
+.w-top .w-r{display:flex;gap:8px;align-items:center}
+.w-shot{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--hot2);background:rgba(4,7,11,.6);backdrop-filter:blur(6px);padding:4px 9px;border-radius:99px;text-shadow:none}
+.w-client{font-size:12px;font-family:var(--mono);color:var(--hot2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.w h3{font-family:var(--head);font-size:24px;font-weight:600;letter-spacing:-.015em;margin-bottom:10px}
+.w p{font-size:14.5px;color:#a9adb9;margin-bottom:18px;max-width:560px}
+.w-foot{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.w-link{font-family:var(--mono);font-size:11.5px;padding:5px 12px;border-radius:99px;border:1px solid var(--hot);color:var(--hot2);display:inline-flex;align-items:center;gap:6px;transition:background .2s,color .2s}
+.w-link:hover{background:var(--hot);color:#140800}
+.w-link.tg{border-color:#2aabee;color:#7fd0ff}
+.w-link.tg:hover{background:#2aabee;color:#04121c}
+@media(max-width:620px){
+  .w{min-height:0;padding:20px 20px 22px}
+  .w-media{bottom:auto;height:min(64vw,300px)}
+  .w-media::after{background:linear-gradient(to bottom,rgba(11,12,16,.5) 0%,rgba(11,12,16,0) 30%,rgba(20,22,29,.6) 75%,var(--card) 100%)}
+  .w-top{padding-bottom:calc(min(64vw,300px) - 70px)}
+  .w:has([data-rot]) .w-r>span:not(.w-shot){display:none}
+}
+.tag-rd{color:var(--cool)}
+.vmodal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;background:rgba(5,6,9,.86);backdrop-filter:blur(8px);padding:24px}
+.vmodal.open{display:flex}
+.vmodal video{width:min(1100px,100%);max-height:84vh;border-radius:14px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.vmodal button{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid var(--line2);background:rgba(20,22,29,.8);color:var(--text);font-size:20px;cursor:pointer}
+.vmodal button:hover{border-color:var(--hot)}
+
+/* STACK */
+.stack{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:900px){.stack{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.stack{grid-template-columns:1fr}}
+.s{border-top:1px solid var(--line2);padding-top:20px}
+.s h4{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--cool);margin-bottom:14px}
+.s ul{list-style:none}
+.s li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}
+.s li span{color:var(--dim);font-size:13px;text-align:right}
+.s li .tn{display:flex;align-items:center;gap:10px;font-weight:500}
+.s li .tn em{font-style:normal}
+.ics{display:inline-flex;gap:4px;flex-shrink:0}
+.ics img,.ics svg{width:18px;height:18px;object-fit:contain;border-radius:4px}
+
+/* WHY */
+.why{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:960px){.why{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.why{grid-template-columns:1fr}}
+.y{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.y b{font-family:var(--head);font-size:42px;font-weight:800;color:transparent;-webkit-text-stroke:1px var(--hot);display:block;line-height:1;margin-bottom:22px}
+.y h3{font-size:17px;font-weight:700;margin-bottom:8px}
+.y p{font-size:14.5px;color:var(--muted)}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:400px 1fr;align-items:start;gap:60px;align-items:center}
+@media(max-width:860px){.about{grid-template-columns:1fr;gap:36px}}
+.star-demo{position:relative;border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;width:100%;max-width:400px;background:#04070b}
+.star-demo.live{cursor:pointer}
+.sd-slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.6s ease}
+.sd-slides img.on{opacity:1}
+.star-demo.live .sd-slides{display:none}
+.star-demo iframe{position:absolute;inset:0;width:100%;height:100%;border:0;pointer-events:none;opacity:0;transition:opacity 1.2s;display:none}
+.star-demo.live iframe{display:block}
+.star-demo.ready iframe{opacity:1}
+.star-demo.active{cursor:grab}
+.star-demo.active iframe{pointer-events:auto}
+.star-demo::after{content:'';position:absolute;inset:0;border-radius:var(--r);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);pointer-events:none}
+.sd-tag,.sd-hint{background:rgba(4,7,11,.62);backdrop-filter:blur(6px);padding:5px 10px;border-radius:99px}
+.sd-tag{position:absolute;left:12px;top:12px;z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--hot2);text-transform:uppercase;pointer-events:none;display:flex;align-items:center;gap:8px}
+.star-demo:not(.live) .sd-tag::before{animation:none;background:var(--hot2)}
+.sd-tag::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--hot);box-shadow:0 0 0 0 rgba(255,106,43,.6);animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(255,106,43,0)}100%{box-shadow:0 0 0 0 rgba(255,106,43,0)}}
+.sd-hint{position:absolute;left:12px;bottom:12px;z-index:2;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;pointer-events:none;transition:opacity .4s}
+.star-demo.active .sd-hint{opacity:0}
+.sd-load{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.sd-load{display:none}
+.star-demo.live:not(.ready) .sd-load{display:grid}
+.sd-cap{max-width:400px;margin-top:14px;font-size:13.5px;color:var(--muted);line-height:1.55}
+.sd-cap a{color:var(--hot2);white-space:nowrap}
+.sd-cap{min-height:4.6em;transition:opacity .5s}
+.sd-cap.fade{opacity:0}
+.sd-gpu{max-width:400px;margin-top:8px;font-size:12.5px;color:var(--dim);line-height:1.55}
+.sd-gpu a,.sd-run{color:var(--hot2);white-space:nowrap}
+.sd-gpu a:hover,.sd-run:hover{text-decoration:underline}
+.sd-run{background:none;border:0;padding:0;font:inherit;cursor:pointer}
+.sd-live{position:absolute;left:50%;bottom:52px;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:#140800;background:var(--hot);border:0;border-radius:99px;padding:9px 16px;cursor:pointer;box-shadow:0 6px 24px rgba(255,106,43,.35);transition:background .2s,transform .2s}
+.sd-live:hover{background:var(--hot2);transform:translateX(-50%) translateY(-1px)}
+.sd-live[hidden]{display:none}
+.sd-dots{display:flex;gap:6px}
+.sd-dots i{width:6px;height:6px;border-radius:50%;background:var(--line2)}
+.sd-dots i.on{background:var(--hot2)}
+.about-txt p{font-size:clamp(17px,1.8vw,20px);color:#c4c7d0;margin-bottom:20px}
+.about-txt p strong{color:var(--text);font-weight:600}
+
+/* CONTACT */
+.contact{border:1px solid var(--line);border-radius:28px;padding:clamp(32px,6vw,72px);background:radial-gradient(ellipse 60% 80% at 100% 0%,rgba(255,106,43,.16),transparent 60%),radial-gradient(ellipse 50% 70% at 0% 100%,rgba(83,214,198,.1),transparent 60%),var(--bg2)}
+.contact h2{margin-bottom:18px}
+.contact .lead{margin:0 0 40px}
+.links{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:860px){.links{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.links{grid-template-columns:1fr}}
+.l{border:1px solid var(--line2);border-radius:14px;padding:18px 20px;transition:border-color .2s,background .2s;display:block}
+.l:hover{border-color:var(--hot);background:rgba(255,106,43,.06)}
+.l small{display:block;font-family:var(--mono);font-size:11px;color:var(--dim);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.l span{font-weight:600;font-size:14.5px;overflow-wrap:anywhere}
+.links{grid-template-columns:1fr 1.35fr 1.2fr 1fr}
+@media(max-width:860px){.links{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.links{grid-template-columns:1fr}}
+footer{padding:40px 0 50px;color:var(--dim);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+.for-note{display:inline-block;max-width:640px;margin:0 0 18px;padding:12px 16px;border:1px solid var(--hot);border-radius:12px;background:rgba(11,12,16,.72);backdrop-filter:blur(6px)}.for-k{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--hot2)}.for-note p{margin:6px 0 0;font-size:15px;color:#e6e7ec}.for-note a{color:var(--hot2);white-space:nowrap}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a href="for/furylion-188d7a/#top" class="logo"><i></i>ARYBASHOV</a>
+    <div class="nav-links">
+      <a href="for/furylion-188d7a/#skills" data-i="nav.skills">Навыки</a>
+      <a href="for/furylion-188d7a/#work" data-i="nav.work">Проекты</a>
+      <a href="for/furylion-188d7a/#stack" data-i="nav.stack">Стек</a>
+      <a href="for/furylion-188d7a/#about" data-i="nav.about">Обо мне</a>
+      <a href="for/furylion-188d7a/#contact" data-i="nav.contact">Контакты</a>
+    </div>
+    <button class="lang" id="lang" aria-label="Switch language">EN</button>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-bg" role="img" aria-label="Александр Рыбашов и визуализация поверхности Солнца"></div>
+  <canvas id="flow" aria-hidden="true"></canvas>
+  <div class="wrap hero-in">
+    <div class="for-note"><span class="for-k">Для FuryLion</span><p>Делаю HTML5- и Telegram-игры и мобильный 3D — как раз ваш профиль заказов. <a href="https://youtu.be/e4cbjexkTRI" target="_blank" rel="noopener">Видео: AI-агент строит сцену в Houdini →</a></p></div>
+    <div class="kicker" data-i="hero.kicker">VFX · Science Viz · AI · Game Dev · Engineering</div>
+    <h1><span data-i="hero.name1">Александр</span> <span class="grad" data-i="hero.name2">Рыбашов</span></h1>
+    <p class="lead" data-i="hero.lead">Визуализирую то, что нельзя увидеть глазом. 20+ лет в компьютерной графике: наука, кино и игры — от симуляции плазмы в Houdini до детали, напечатанной на 3D-принтере.</p>
+    <div class="cta">
+      <a class="btn btn-hot" href="https://t.me/arybashov" target="_blank" rel="noopener" data-i="hero.cta1">Написать в Telegram →</a>
+      <a class="btn btn-ghost" href="for/furylion-188d7a/#work" data-i="hero.cta2">Смотреть проекты</a>
+    </div>
+  </div>
+  <div class="hint" data-i="hero.hint">ДВИГАЙТЕ КУРСОРОМ</div>
+</header>
+
+<div class="stats-strip"><div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>20+</b><span data-i="st.1">лет в CG</span></div>
+      <div class="stat"><b>3</b><span data-i="st.2">научных института</span></div>
+      <div class="stat"><b>6</b><span data-i="st.3">дисциплин в одном пайплайне</span></div>
+      <div class="stat"><b>∞</b><span data-i="st.4">полный цикл</span></div>
+    </div>
+</div></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><div class="sec-num">01 / SKILLS</div><h2 data-i="sk.h">Шесть дисциплин — один человек</h2></div>
+      <p class="sec-sub" data-i="sk.sub">Не мозаика из фрилансеров, а единый пайплайн: концепт, симуляция, рендер, код и производство в одних руках.</p>
+    </div>
+    <div class="disc rv">
+      <div class="d">
+        <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 30c6-10 12 6 18-4s12 6 18-4"/><path d="M6 38c6-10 12 6 18-4s12 6 18-4" opacity=".5"/><circle cx="14" cy="12" r="2"/><circle cx="26" cy="8" r="1.5"/><circle cx="36" cy="14" r="2.5"/></svg>
+        <h3 data-i="d1.h">VFX и процедурные симуляции</h3>
+        <p data-i="d1.p">Огонь, вода, дым, разрушения и частицы. Процедурная генерация геометрии и эффектов для кино, игр и синематиков.</p>
+        <div class="chips"><span class="chip">Houdini</span><span class="chip">Pyro / FLIP</span><span class="chip">Particles</span><span class="chip">VEX</span></div>
+      </div>
+      <div class="d">
+        <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="10"/><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10 10l4 4M34 34l4 4M10 38l4-4M34 14l4-4"/></svg>
+        <h3 data-i="d2.h">Научная визуализация</h3>
+        <p data-i="d2.p">Точные модели сложных явлений для исследований и образования: поверхность Солнца, плазма, вычислительная математика.</p>
+        <div class="chips"><span class="chip">Астрофизика</span><span class="chip">Мат. модели</span><span class="chip">Houdini</span></div>
+      </div>
+      <div class="d">
+        <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="10" width="36" height="26" rx="4"/><path d="M20 18l10 5-10 5z"/><path d="M14 42h20"/></svg>
+        <h3 data-i="d3.h">AI-видео продакшн</h3>
+        <p data-i="d3.p">Генеративное видео с профессиональным композом и motion-графикой. Промпт-инжиниринг, серии и кампании.</p>
+        <div class="chips"><span class="chip">Kling</span><span class="chip">Higgsfield</span><span class="chip">ChatGPT</span><span class="chip">Claude</span></div>
+      </div>
+      <div class="d">
+        <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 18h32v16a6 6 0 0 1-6 6H14a6 6 0 0 1-6-6z"/><path d="M16 26h6M19 23v6"/><circle cx="31" cy="25" r="1.5"/><circle cx="34" cy="29" r="1.5"/><path d="M18 18l2-8h8l2 8"/></svg>
+        <h3 data-i="d4.h">Геймдев и real-time</h3>
+        <p data-i="d4.p">Игры, VR и интерактив: материалы, шейдеры, real-time VFX, оптимизация под мобильные платформы.</p>
+        <div class="chips"><span class="chip">Unreal Engine</span><span class="chip">Godot</span><span class="chip">Unity</span><span class="chip">Three.js</span></div>
+      </div>
+      <div class="d">
+        <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 8h28v8H10z"/><path d="M24 16v8"/><path d="M14 40l10-16 10 16z"/><path d="M8 40h32"/></svg>
+        <h3 data-i="d5.h">Инженерия и 3D-печать</h3>
+        <p data-i="d5.p">Параметрическое CAD, подготовка к производству, допуски и посадки. От цифровой модели к работающей детали.</p>
+        <div class="chips"><span class="chip">Fusion 360</span><span class="chip">FDM: PLA/PETG/ABS/TPU</span><span class="chip">Прототипы</span></div>
+      </div>
+      <div class="d">
+        <svg class="d-ico" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 14L6 24l10 10M32 14l10 10-10 10M27 10l-6 28"/></svg>
+        <h3 data-i="d6.h">Код, ML и симуляции</h3>
+        <p data-i="d6.p">Python-инструменты и автоматизация пайплайнов, компьютерное зрение, обучение с подкреплением для управления дронами.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">PyTorch</span><span class="chip">OpenCV / YOLO</span><span class="chip">RL</span><span class="chip">C++</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><div class="sec-num">02 / WORK</div><h2 data-i="wk.h">Избранные проекты</h2></div>
+      <p class="sec-sub" data-i="wk.sub">От государственных и академических заказов до своих игр и R&D-систем.</p>
+    </div>
+    <div class="work">
+      <article class="w rv">
+        <div class="w-media rot" data-rot><img src="assets/cards/rram/stand-house.webp" alt="RRaM — 3D-стенд: дом у озера" data-ru="3D-стенд: дом у озера" data-en="3D stand: lake house" loading="lazy" class="on"><img src="assets/cards/rram/concept.webp" alt="RRaM — Концепт дома" data-ru="Концепт дома" data-en="House concept" loading="lazy"><img src="assets/cards/rram/blueprint.webp" alt="RRaM — Чертёж дома" data-ru="Чертёж дома" data-en="House blueprint" loading="lazy"><img src="assets/cards/rram/model.webp" alt="RRaM — 3D-модель" data-ru="3D-модель" data-en="3D model" loading="lazy"><img src="assets/cards/rram/textures.webp" alt="RRaM — Текстуры" data-ru="Текстуры" data-en="Textures" loading="lazy"><img src="assets/cards/rram/stand-bridge.webp" alt="RRaM — 3D-стенд: мост" data-ru="3D-стенд: мост" data-en="3D stand: bridge" loading="lazy"></div>
+        <div class="w-top"><span>004</span><span class="w-r"><span>BOARD GAME · ONLINE</span></span></div>
+        <div class="w-client" data-i="w9.c">Собственная разработка</div>
+        <h3>RRaM</h3>
+        <p data-i="w9.p">Цифровая версия настольной игры: гексагональное поле, карты, кубики, бои. Клиент, сервер, 3D-стенд поля и графика — от концептов и чертежей до релиза на Яндекс Играх.</p>
+        <div class="w-foot"><span class="chip">JS</span><span class="chip">Node.js</span><span class="chip">WebSocket</span><span class="chip">Three.js</span></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/yui.webp" alt="Карточная игра YUI" loading="lazy"></div>
+        <div class="w-top"><span>005</span><span class="w-r"><span>CARD GAME · TELEGRAM</span></span></div>
+        <div class="w-client" data-i="w10.c">Своя игра</div>
+        <h3>YUI</h3>
+        <p data-i="w10.p">Карточная игра на 20 картах: онлайн с друзьями по коду комнаты, боты, обучение. Проигравший раздачу получает букву — кто собрал Y-U-I, проиграл матч.</p>
+        <div class="w-foot"><span class="chip">TypeScript</span><span class="chip">WebSocket</span><span class="chip">Telegram Mini App</span><a class="w-link tg" href="https://t.me/yui_cards_bot" target="_blank" rel="noopener"><span data-i="wl.tg">✈ Играть в Telegram</span></a></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/gorodki.webp?v=2" alt="Gorodki 3D" loading="lazy"></div>
+        <div class="w-top"><span>006</span><span class="w-r"><span>GAME · iOS</span></span></div>
+        <div class="w-client" data-i="w6.c">Инди-игра</div>
+        <h3>Gorodki 3D</h3>
+        <p data-i="w6.p">Полный цикл: геймплей, 3D-ассеты, оптимизация под мобильные устройства.</p>
+        <div class="w-foot"><span class="chip">Godot</span><span class="chip">iOS</span></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/demo.webp" alt="Шоурил" loading="lazy"></div>
+        <div class="w-top"><span>008</span><span class="w-r"><span>REEL</span></span></div>
+        <div class="w-client">Showreel</div>
+        <h3>DEMO 2025</h3>
+        <p data-i="w8.p">Фрагменты разных проектов в одном ролике — диапазон навыков и технологий.</p>
+        <div class="w-foot"><span class="chip">Houdini</span><span class="chip">Unreal</span><span class="chip">AI</span><a class="w-link" href="https://www.youtube.com/channel/UChwymOtxgOrdCRTa1yj_3QA" target="_blank" rel="noopener"><span data-i="wl.ch">▶ Канал на YouTube</span></a></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/houdini-agent.webp?v=1" alt="AI-агент в Houdini: жеода и сеть нод" loading="lazy"></div>
+        <div class="w-top"><span>NEW</span><span class="w-r"><span>AI AGENT · HOUDINI</span></span></div>
+        <div class="w-client" data-i="w0.c">Собственный эксперимент</div>
+        <h3 data-i="w0.h">AI-агент в Houdini</h3>
+        <p data-i="w0.p">Подключил Claude к Houdini через MCP: агент сам строит процедурные сети нод — жеода из 31 ноды за 22 минуты. По пути нашёл и исправил баги в двух open-source проектах.</p>
+        <div class="w-foot"><span class="chip">Houdini</span><span class="chip">Claude</span><span class="chip">MCP</span><span class="chip">Python</span><a class="w-link" href="https://youtu.be/e4cbjexkTRI" target="_blank" rel="noopener"><span data-i="wl.yt">▶ Смотреть на YouTube</span></a><a class="w-link" href="https://dtf.ru/gamedev/5377420-kak-ai-agent-optimiziruet-rabotu-v-houdini" target="_blank" rel="noopener"><span data-i="wl.dtf">Статья на DTF →</span></a></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/cosmos.webp" alt="Внутренний космос" loading="lazy"></div>
+        <div class="w-top"><span>001</span><span class="w-r"><span>AI VIDEO · FILM</span></span></div>
+        <div class="w-client" data-i="w1.c">Космическая отрасль</div>
+        <h3 data-i="w1.h">«Внутренний космос»</h3>
+        <p data-i="w1.p">Философский фильм: путь от наблюдения Вселенной к безграничности человеческого сознания. Генеративный AI в официальном проекте.</p>
+        <div class="w-foot"><span class="chip">ChatGPT</span><span class="chip">Kling</span><a class="w-link" href="assets/video/inner-cosmos.mp4" data-video="assets/video/inner-cosmos.mp4" data-poster="assets/cards/cosmos.webp"><span data-i="wl.film">▶ Смотреть фильм</span></a></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/elavia.webp" alt="Промо пассажирского дрона" loading="lazy"></div>
+        <div class="w-top"><span>002</span><span class="w-r"><span>PROMO · UE</span></span></div>
+        <div class="w-client" data-i="w2.c">Производитель дронов</div>
+        <h3 data-i="w2.h">Промо пассажирского дрона</h3>
+        <p data-i="w2.p">Фотореалистичный ролик о будущем городской мобильности: дизайн дрона и полёты над городом.</p>
+        <div class="w-foot"><span class="chip">Unreal Engine</span><span class="chip">Houdini</span><span class="chip">Blender</span><span class="chip">DaVinci</span><a class="w-link" href="https://www.youtube.com/watch?v=htJQTrWHgsk" target="_blank" rel="noopener"><span data-i="wl.yt">▶ Смотреть на YouTube</span></a></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media"><img src="assets/cards/math.webp" alt="Модели для вычислительной математики" loading="lazy"></div>
+        <div class="w-top"><span>003</span><span class="w-r"><span>SCIENCE VIZ</span></span></div>
+        <div class="w-client" data-i="w4.c">Научный институт</div>
+        <h3 data-i="w4.h">Модели для вычислительной математики</h3>
+        <p data-i="w4.p">Долгосрочное сотрудничество: графические модели для научных исследований.</p>
+        <div class="w-foot"><span class="chip">Research</span><span class="chip">Houdini</span></div>
+      </article>
+      <article class="w rv">
+        <div class="w-media rot" data-rot><img src="assets/cards/flight/launch.webp" alt="Лётная школа — Демонстратор: взлёт антидронов" data-ru="Демонстратор: взлёт антидронов" data-en="Demonstrator: interceptors launch" loading="lazy" class="on"><img src="assets/cards/flight/detect.webp" alt="Лётная школа — Зоны обнаружения камер" data-ru="Зоны обнаружения камер" data-en="Camera detection zones" loading="lazy"><img src="assets/cards/flight/track.webp" alt="Лётная школа — Сопровождение целей" data-ru="Сопровождение целей" data-en="Target tracking" loading="lazy"><img src="assets/cards/flight/intercept.webp" alt="Лётная школа — Перехват" data-ru="Перехват" data-en="Interception" loading="lazy"><img src="assets/cards/flight/guidance.webp" alt="Лётная школа — Наведение" data-ru="Наведение" data-en="Guidance" loading="lazy"></div>
+        <div class="w-top"><span>007</span><span class="w-r"><span><span class="tag-rd">R&amp;D</span></span></span></div>
+        <div class="w-client" data-i="w7.c">Собственная разработка</div>
+        <h3 data-i="w7.h">Лётная школа для дронов</h3>
+        <p data-i="w7.p">Симулятор с 6-DOF динамикой: автопилот плюс обучение с подкреплением для наведения и групповых сценариев.</p>
+        <div class="w-foot"><span class="chip">Python</span><span class="chip">RL</span><span class="chip">C++</span><span class="chip">JS</span><a class="w-link" href="sim/" target="_blank" rel="noopener"><span data-i="wl.sim">▶ Запустить симулятор</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STACK -->
+<section id="stack" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><div class="sec-num">03 / STACK</div><h2 data-i="stk.h">Инструменты</h2></div>
+      <p class="sec-sub" data-i="stk.sub">Выбираю инструмент под задачу, а не задачу под инструмент.</p>
+    </div>
+    <div class="stack rv">
+      <div class="s"><h4>3D / VFX</h4><ul>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/houdini.svg" alt="" width="18" height="18" loading="lazy"></i><em>Houdini</em></b><span data-i="t.hou">симуляции, процедурка</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/blender.svg" alt="" width="18" height="18" loading="lazy"></i><em>Blender</em></b><span data-i="t.bl">моделинг, скульпт, рендер</span></li>
+      </ul></div>
+      <div class="s"><h4>Real-time</h4><ul>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/unrealengine.svg" alt="" width="18" height="18" loading="lazy"></i><em>Unreal Engine</em></b><span data-i="t.ue">игры, VR, шейдеры</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/godotengine.svg" alt="" width="18" height="18" loading="lazy"></i><em>Godot</em></b><span>mobile / iOS</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/unity.svg" alt="" width="18" height="18" loading="lazy"></i><em>Unity</em></b><span>games</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/threedotjs.svg" alt="" width="18" height="18" loading="lazy"></i><em>Three.js / WebGL</em></b><span>web 3D</span></li>
+      </ul></div>
+      <div class="s"><h4>Post</h4><ul>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/nuke.svg" alt="" width="18" height="18" loading="lazy"></i><em>Nuke</em></b><span data-i="t.nk">композитинг</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/adobeaftereffects.svg" alt="" width="18" height="18" loading="lazy"></i><em>After Effects</em></b><span>motion graphics</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/davinciresolve.svg" alt="" width="18" height="18" loading="lazy"></i><em>DaVinci Resolve</em></b><span data-i="t.dv">монтаж, цвет</span></li>
+      </ul></div>
+      <div class="s"><h4>AI</h4><ul>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/kling.png" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/higgsfield.svg" alt="" width="18" height="18" loading="lazy"></i><em>Kling · Higgsfield</em></b><span data-i="t.vid">генерация видео</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/claude.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/openai.svg" alt="" width="18" height="18" loading="lazy"></i><em>Claude · ChatGPT</em></b><span data-i="t.ag">агенты, сценарии</span></li>
+      </ul></div>
+      <div class="s"><h4>Engineering</h4><ul>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/autodesk.svg" alt="" width="18" height="18" loading="lazy"></i><em>Fusion 360</em></b><span data-i="t.cad">параметрическое CAD</span></li>
+        <li><b class="tn"><i class="ics"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#53d6c6" stroke-width="1.8"><path d="M4 4h16v5H4zM12 9v4M8 20l4-7 4 7zM5 20h14"/></svg></i><em>FDM / FFF</em></b><span data-i="t.pr">3D-печать</span></li>
+        <li><b class="tn"><i class="ics"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ffb03b" stroke-width="1.8"><path d="M9 3h6v6l-3 3-3-3zM12 12v6M6 21h12"/></svg></i><em data-i="t.mill">Фрезеровка, допуски</em></b><span>CNC</span></li>
+      </ul></div>
+      <div class="s"><h4>Code</h4><ul>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/python.svg" alt="" width="18" height="18" loading="lazy"></i><em>Python</em></b><span>tools, ML, pipeline</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/pytorch.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/opencv.svg" alt="" width="18" height="18" loading="lazy"></i><em>PyTorch · OpenCV</em></b><span>CV / RL</span></li>
+        <li><b class="tn"><i class="ics"><img src="assets/icons/cplusplus.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/openjdk.svg" alt="" width="18" height="18" loading="lazy"><img src="assets/icons/javascript.svg" alt="" width="18" height="18" loading="lazy"></i><em>C++ · Java · JS</em></b><span>sim, games, web</span></li>
+      </ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><div class="sec-num">04 / WHY</div><h2 data-i="why.h">Почему со мной удобно</h2></div>
+    </div>
+    <div class="why">
+      <div class="y rv"><b>01</b><h3 data-i="y1.h">Полный цикл</h3><p data-i="y1.p">От идеи и концепта до финального рендера или детали в руках — без привлечения других подрядчиков.</p></div>
+      <div class="y rv"><b>02</b><h3 data-i="y2.h">Техническая глубина</h3><p data-i="y2.p">Код, симуляции и ML там, где обычный художник упирается в ограничения инструмента.</p></div>
+      <div class="y rv"><b>03</b><h3 data-i="y3.h">Физика реального мира</h3><p data-i="y3.p">Опыт механообработки и 3D-печати: понимаю нагрузки, допуски и как модель станет вещью.</p></div>
+      <div class="y rv"><b>04</b><h3 data-i="y4.h">Самостоятельность</h3><p data-i="y4.p">20+ лет опыта: вижу задачу целиком, ставлю себе цели и довожу до результата без надзора.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="padding-top:40px">
+  <div class="wrap about">
+    <div class="rv">
+      <div class="star-demo" id="starDemo" data-src="/lab/" data-preset="1" aria-label="Симуляция звёзд">
+        <div class="sd-slides">
+          <img src="assets/stars/barnard.webp" alt="Звезда Барнарда — кадр симулятора" class="on">
+          <img src="assets/stars/proxima-arcs.webp" alt="Арки короны Проксимы Центавра — кадр симулятора" loading="lazy">
+          <img src="assets/stars/sun-cme.webp" alt="Корональный выброс на Солнце — кадр симулятора" loading="lazy">
+          <img src="assets/stars/proxima.webp" alt="Проксима Центавра — кадр симулятора" loading="lazy">
+          <img src="assets/stars/sun.webp" alt="Солнце — кадр симулятора" loading="lazy">
+          <img src="assets/stars/eps-indi.webp" alt="ε Индейца — кадр симулятора" loading="lazy">
+        </div>
+        <iframe title="Симулятор звезды М31" tabindex="-1"></iframe>
+        <div class="sd-load" id="sdLoad">Зажигаем звезду…</div>
+        <span class="sd-tag" id="sdTag">Звезда Барнарда · M4V</span>
+        <span class="sd-hint" id="sdHint"></span>
+        <button type="button" class="sd-live" id="sdLive" hidden></button>
+      </div>
+      <p class="sd-cap"><span id="sdCap"></span></p>
+      <p class="sd-gpu"><span id="sdGpu"></span> <button type="button" class="sd-run" id="sdRun"></button> <a href="/lab/" target="_blank" rel="noopener" id="sdOpen"></a></p>
+    </div>
+    <div class="about-txt rv">
+      <div class="sec-num">05 / ABOUT</div>
+      <p data-i="ab.1">Больше двадцати лет я работаю на стыке <strong>искусства и технологий</strong>: создаю визуальные системы для игр, науки и экрана.</p>
+      <p data-i="ab.2">Мои работы — от инди-геймдева до <strong>государственных и академических заказов</strong>. Houdini, Unreal Engine, Python и машинное обучение у меня не набор отдельных навыков, а один пайплайн.</p>
+      <p data-i="ab.3">Постоянно осваиваю новое: сейчас это AI-видео, агентные инструменты и обучение с подкреплением для робототехники и дронов.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="padding-top:40px;padding-bottom:40px">
+  <div class="wrap">
+    <div class="contact rv">
+      <div class="sec-num">06 / CONTACT</div>
+      <h2 data-i="ct.h">Давайте сделаем что-то выдающееся</h2>
+      <p class="lead" data-i="ct.p">Расскажите о проекте: что нужно, к какому сроку и в каком бюджете. Отвечу в течение суток с реалистичной оценкой.</p>
+      <div class="links">
+        <a class="l" href="https://t.me/arybashov" target="_blank" rel="noopener"><small data-i="ct.fast">Telegram · быстрее всего</small><span>@arybashov</span></a>
+        <a class="l" href="mailto:arybashov@gmail.com"><small>Email</small><span>arybashov@gmail.com</span></a>
+        <a class="l" href="https://alexanderrybashov.artstation.com" target="_blank" rel="noopener"><small>ArtStation</small><span>alexanderrybashov</span></a>
+        <a class="l" href="https://www.youtube.com/channel/UChwymOtxgOrdCRTa1yj_3QA" target="_blank" rel="noopener"><small>YouTube</small><span data-i="ct.yt">Шоурилы</span></a>
+      </div>
+    </div>
+    <footer><span>© 2026 <span data-i="ft.name">Александр Рыбашов</span></span><a href="https://github.com/arybashov" target="_blank" rel="noopener">github.com/arybashov</a></footer>
+  </div>
+</section>
+
+<script>
+/* ---------- i18n ---------- */
+const EN = {
+ 'nav.skills':'Skills','nav.work':'Work','nav.stack':'Stack','nav.about':'About','nav.contact':'Contact',
+ 'hero.name1':'Alexander','hero.name2':'Rybashov',
+ 'hero.lead':'I visualize what the eye cannot see. 20+ years in computer graphics: science, film and games — from Houdini plasma simulations to a part fresh off the 3D printer.',
+ 'hero.cta1':'Message on Telegram →','hero.cta2':'See the work','hero.hint':'MOVE YOUR CURSOR',
+ 'st.1':'years in CG','st.2':'research institutions','st.3':'disciplines, one pipeline','st.4':'full cycle',
+ 'sk.h':'Six disciplines — one person','sk.sub':'Not a patchwork of freelancers but one pipeline: concept, simulation, render, code and production in the same hands.',
+ 'd1.h':'VFX & procedural simulation','d1.p':'Fire, water, smoke, destruction and particles. Procedural geometry and effects for film, games and cinematics.',
+ 'd2.h':'Scientific visualization','d2.p':'Accurate models of complex phenomena for research and education: solar surface, plasma, computational mathematics.',
+ 'd3.h':'AI video production','d3.p':'Generative video finished with professional compositing and motion graphics. Prompt engineering, series and campaigns.',
+ 'd4.h':'Game dev & real-time','d4.p':'Games, VR and interactive: materials, shaders, real-time VFX, mobile optimization.',
+ 'd5.h':'Engineering & 3D printing','d5.p':'Parametric CAD, manufacturing prep, tolerances and fits. From a digital model to a working part.',
+ 'd6.h':'Code, ML & simulation','d6.p':'Python tools and pipeline automation, computer vision, reinforcement learning for drone control.',
+ 'wk.h':'Selected work','wk.sub':'From government and academic commissions to my own games and R&D systems.',
+ 'w1.c':'Space industry','w1.h':'“Inner Cosmos”','w1.p':'A philosophical film: from observing the Universe to the boundlessness of human consciousness. Generative AI in an official project.',
+ 'w2.c':'Drone manufacturer',
+ 'w2.h':'Passenger drone promo','w2.p':'A photoreal film about the future of urban mobility: drone design and flights over the city.',
+ 'w4.c':'Research institute','w4.h':'Models for computational math','w4.p':'Long-term collaboration: graphic models for scientific research.',
+ 'w9.c':'In-house project','w9.p':'A digital version of a board game: hex board, cards, dice, battles. Client, server, a 3D board stand and the art — from concepts and blueprints to a release on Yandex Games.',
+ 'w10.c':'My own game','w10.p':'A card game with 20 cards: play friends online by room code, bots, a tutorial. The loser of a deal gets a letter — collect Y-U-I and you lose the match.',
+ 'w0.c':'Own experiment','w0.h':'AI agent in Houdini','w0.p':'I connected Claude to Houdini via MCP: the agent builds procedural node networks on its own — a geode from 31 nodes in 22 minutes. Along the way I found and fixed bugs in two open-source projects.','wl.dtf':'Article on DTF (RU) →','wl.yt':'▶ Watch on YouTube','wl.tg':'✈ Play in Telegram','wl.ch':'▶ YouTube channel','wl.sim':'▶ Launch the simulator','wl.film':'▶ Watch the film',
+ 'w6.c':'Indie game','w6.p':'Full cycle: gameplay, 3D assets, mobile optimization.',
+ 'w7.c':'In-house R&D','w7.h':'Flight school for drones','w7.p':'A 6-DOF dynamics simulator: autopilot plus reinforcement learning for guidance and swarm scenarios.',
+ 'w8.p':'Clips from many projects in one reel — the range of skills and tools.',
+ 'stk.h':'Tools','stk.sub':'I pick the tool for the task, not the task for the tool.',
+ 't.hou':'simulation, procedural','t.bl':'modeling, sculpt, render','t.ue':'games, VR, shaders','t.nk':'compositing','t.dv':'edit, color',
+ 't.vid':'video generation','t.ag':'agents, scripts','t.cad':'parametric CAD','t.pr':'3D printing','t.mill':'Milling, tolerances',
+ 'why.h':'Why work with me',
+ 'y1.h':'Full cycle','y1.p':'From idea and concept to the final render or a part in your hands — no extra contractors.',
+ 'y2.h':'Technical depth','y2.p':'Code, simulation and ML where a typical artist hits the limits of the tool.',
+ 'y3.h':'Real-world physics','y3.p':'Machining and 3D-printing experience: I understand loads, tolerances and how a model becomes a thing.',
+ 'y4.h':'Autonomy','y4.p':'20+ years in: I see the whole problem, set my own goals and deliver without supervision.',
+ 'ab.1':'For over twenty years I have worked where <strong>art meets technology</strong>, building visual systems for games, science and the screen.',
+ 'ab.2':'My work ranges from indie game dev to <strong>government and academic commissions</strong>. Houdini, Unreal Engine, Python and machine learning are not separate skills for me — they are one pipeline.',
+ 'ab.3':'I keep learning: right now it is AI video, agentic tooling and reinforcement learning for robotics and drones.',
+ 'ct.h':'Let’s build something extraordinary','ct.p':'Tell me about your project: what you need, when, and the rough budget. I reply within 24 hours with a realistic estimate.',
+
+ 'ct.fast':'Telegram · fastest','ct.yt':'Showreels','ft.name':'Alexander Rybashov'
+};
+const RU = {};
+document.querySelectorAll('[data-i]').forEach(el=>RU[el.dataset.i]=el.innerHTML);
+let lang='ru';
+function setLang(l){
+  lang=l; const d=l==='en'?EN:RU;
+  document.querySelectorAll('[data-i]').forEach(el=>{const v=d[el.dataset.i]; if(v!==undefined) el.innerHTML=v;});
+  document.documentElement.lang=l;
+  document.getElementById('lang').textContent=l==='en'?'RU':'EN';
+  try{localStorage.setItem('lang',l)}catch(e){}
+}
+document.getElementById('lang').onclick=()=>setLang(lang==='ru'?'en':'ru');
+try{ if(localStorage.getItem('lang')==='en') setLang('en'); }catch(e){}
+
+/* ---------- nav + reveal ---------- */
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>40),{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- hero flow field ---------- */
+(function(){
+  const c=document.getElementById('flow'), x=c.getContext('2d');
+  let W,H,dpr,P=[],t=0,mx=-9999,my=-9999;
+  // cheap smooth noise
+  function n(a,b){return Math.sin(a*1.7+Math.sin(b*1.3+t*.3))*Math.cos(b*1.9-Math.cos(a*.9-t*.2))}
+  function resize(){
+    dpr=Math.min(devicePixelRatio||1,2);
+    W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0);
+    x.clearRect(0,0,W,H);
+    const N=Math.min(1100,Math.floor(W*H/1300));
+    P=Array.from({length:N},()=>spawn());
+  }
+  function spawn(){return{x:Math.random()*W,y:Math.random()*H,l:Math.random()*200+60,h:Math.random()}}
+  addEventListener('resize',resize);
+  addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
+  function frame(){
+    t+=.005;
+    x.globalCompositeOperation='destination-out';x.fillStyle='rgba(0,0,0,.09)';x.fillRect(0,0,W,H);x.globalCompositeOperation='source-over';
+    x.lineWidth=1;
+    for(const p of P){
+      const s=.0022;
+      let a=n(p.x*s,p.y*s)*Math.PI*2;
+      let vx=Math.cos(a)*1.3+.35, vy=Math.sin(a)*1.3;
+      const dx=p.x-mx,dy=p.y-my,d2=dx*dx+dy*dy;
+      if(d2<26000){const f=(1-d2/26000)*3.2;vx+=(-dy/Math.sqrt(d2+1))*f;vy+=(dx/Math.sqrt(d2+1))*f;}
+      const ox=p.x,oy=p.y; p.x+=vx;p.y+=vy;p.l--;
+      x.strokeStyle=p.h>.82?'rgba(83,214,198,.7)':(p.h>.4?'rgba(255,140,60,.55)':'rgba(255,190,90,.4)');
+      x.beginPath();x.moveTo(ox,oy);x.lineTo(p.x,p.y);x.stroke();
+      if(p.l<0||p.x<-5||p.x>W+5||p.y<-5||p.y>H+5)Object.assign(p,spawn());
+    }
+    if(!reduced)requestAnimationFrame(frame);
+  }
+  resize();
+  if(reduced){for(let i=0;i<120;i++)frame()} else frame();
+})();
+
+/* ---------- video modal ---------- */
+(()=>{const m=document.createElement('div');m.className='vmodal';m.innerHTML='<button type="button" aria-label="Закрыть">×</button><video controls playsinline preload="none"></video>';document.body.appendChild(m);
+const v=m.querySelector('video');const close=()=>{v.pause();m.classList.remove('open');v.removeAttribute('src');v.load()};
+document.querySelectorAll('[data-video]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();v.poster=a.dataset.poster||'';v.src=a.dataset.video;m.classList.add('open');v.play().catch(()=>{})}));
+m.addEventListener('click',e=>{if(e.target===m||e.target.tagName==='BUTTON')close()});addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))close()});})();
+/* ---------- rotating card images (RRaM) ---------- */
+document.querySelectorAll('[data-rot]').forEach(box=>{
+  const ims=[...box.querySelectorAll('img')], card=box.closest('.w'), right=card.querySelector('.w-r');
+  const shot=document.createElement('span'); shot.className='w-shot'; right.prepend(shot);
+  let i=0, tm=0;
+  const label=()=>{shot.textContent=ims[i].dataset[document.documentElement.lang==='en'?'en':'ru']};
+  const show=k=>{ims[i].classList.remove('on');i=k;ims[i].classList.add('on');label()};
+  label();
+  new IntersectionObserver(es=>es.forEach(e=>{clearInterval(tm);if(e.isIntersecting&&!matchMedia('(prefers-reduced-motion: reduce)').matches)tm=setInterval(()=>show((i+1)%ims.length),3200)})).observe(box);
+  new MutationObserver(label).observe(document.documentElement,{attributes:true,attributeFilter:['lang']});
+});
+</script>
+<script src="assets/star-demo.js?v=11" defer></script>
+</body>
+</html>
