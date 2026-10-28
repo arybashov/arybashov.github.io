@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /for/
+Sitemap: https://arybashov.github.io/sitemap.xml
