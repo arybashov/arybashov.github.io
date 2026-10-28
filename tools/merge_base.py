@@ -77,7 +77,7 @@ def main() -> None:
             flags.append("см. заметки")
         r["email_type"] = email_type(e) if e else "нет почты"
         r["check"] = ", ".join(flags)
-        r["priority"] = ("A" if r["email_type"] == "hr" else "B" if r["email_type"] == "general" else "C") if e else "—"
+        r["priority"] = r.get("priority") or ("A" if r["email_type"] == "hr" else "B" if r["email_type"] == "general" else "C") if e else "—"
         s = slugify(r["name"])
         while s in slugs:
             s += "-2"
